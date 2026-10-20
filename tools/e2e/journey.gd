@@ -28,10 +28,19 @@ func _run() -> void:
 	ads.available = false
 	AdGateway.configure(ads, clock)
 	await _mount()
-	e2e.begin("onboarding-and-cosmetics", ["core-loop", "cosmetics", "settings"])
+	e2e.begin("onboarding-and-cosmetics", ["core-loop", "events-endings", "cosmetics", "settings"])
+	# 파일이 있어도 import remap이 빠지면 폴백으로 실행된다. 실제 리소스 로드까지 검사한다.
+	for ending: Dictionary in gc.content.endings:
+		if bool(ending.get("cg", false)):
+			e2e.step("CG texture imported: " + str(ending.id), Art.has_art("cg_" + str(ending.id)))
+	for season_name: String in ["spring", "summer", "autumn", "winter"]:
+		e2e.step("home background imported: " + season_name, Art.has_art("bg_home_" + season_name))
+	for audio_path: String in ["res://assets/audio/bgm_home.ogg", "res://assets/audio/bgm_ending.ogg", "res://assets/audio/sfx/tap.ogg"]:
+		e2e.step("audio resource imported: " + audio_path, ResourceLoader.exists(audio_path, "AudioStream"))
 	await e2e.shot("01-onboarding")
 	await _tap("이 아이와 시작하기")
 	e2e.expect_equal("home after actual start tap", main.get("_current_name"), "home")
+	e2e.step("child body texture imported", Art.has_art(Art.char_body_name(gc.run.child.stage, str(gc.run.child.appearance.get("hair", "mushroom")))))
 	await e2e.shot("02-home")
 	await _tap("꾸미기")
 	await e2e.shot("03-shop")
@@ -147,6 +156,11 @@ func _run() -> void:
 	e2e.expect_equal("next run turn persisted", gc.run.turn_index, 1)
 	e2e.end()
 	await e2e.unmount(main)
+	# 사인 톤의 짧은 지연 재생도 끝낸 뒤 종료한다.
+	await create_timer(0.1).timeout
+	root.get_node("AudioBus").stop_all()
+	# stop은 오디오 스레드에서 처리된다. 실제 파일 재생을 종료한 뒤 믹스를 기다린다.
+	await create_timer(0.1).timeout
 	AdGateway.reset_test_state()
 	ads.reward_callback = Callable()
 	ads.close_callback = Callable()

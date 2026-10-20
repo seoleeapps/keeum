@@ -39,6 +39,10 @@ func _ready() -> void:
 		_bgm_players.append(bp)
 
 func _exit_tree() -> void:
+	stop_all()
+
+## 종료 전 오디오 믹서가 재생 참조를 놓을 수 있도록 먼저 호출할 수 있다.
+func stop_all() -> void:
 	# 플레이어의 stream 참조까지 해제("resources still in use at exit" 방지).
 	for p: AudioStreamPlayer in _players:
 		p.stop()

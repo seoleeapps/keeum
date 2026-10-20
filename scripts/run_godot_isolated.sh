@@ -158,14 +158,20 @@ run_godot() {
   fi
 }
 
-# 캐시는 동일한 소스 집합에서만 재사용한다. 폰트 remap과 fontdata는 한 쌍이다.
-source_key="$(python3 - "$repo_root" <<'PYKEY'
+# 캐시는 동일한 소스와 리소스 집합에서만 재사용한다.
+source_key="$(python3 - "$repo_root" "$("$godot_bin" --version)" <<'PYKEY'
 import hashlib, sys
 from pathlib import Path
-root = Path(sys.argv[1]); digest = hashlib.sha256()
-for folder in ['core', 'game', 'tools', 'addons', 'data']:
+root = Path(sys.argv[1]); digest = hashlib.sha256(b'keeum-import-cache-v2\0')
+digest.update(sys.argv[2].encode())
+for folder in ['core', 'game', 'tools', 'addons', 'data', 'assets']:
     for path in sorted((root / folder).rglob('*')):
-        if path.is_file() and path.suffix in ['.gd', '.tscn', '.json', '.ttf']:
+        # .gdignore 아래 원본은 게임에서 임포트하지 않는다.
+        ignored = any((parent / '.gdignore').exists() for parent in path.parents if parent != root and root in parent.parents)
+        if path.is_file() and not ignored and path.suffix in [
+            '.gd', '.uid', '.tscn', '.tres', '.json', '.ttf', '.otf', '.png',
+            '.svg', '.webp', '.ogg', '.wav', '.mp3', '.gdextension', '.gdap'
+        ]:
             digest.update(str(path.relative_to(root)).encode()); digest.update(path.read_bytes())
 digest.update((root / 'project.godot').read_bytes())
 print(digest.hexdigest())
@@ -174,15 +180,16 @@ PYKEY
 # 새 macOS 프로젝트 이름에는 Godot의 전역 클래스 캐시가 없다. 같은 상위 검증
 # 실행에서는 최초 임포트 결과를 복사해 쓰되, 각 Godot 프로세스의 .godot 디렉터리와
 # user://는 계속 분리한다. 픽스처는 준비가 끝난 뒤에 만들므로 임포트가 건드릴 수 없다.
-if [[ "$(uname -s)" == "Darwin" && -n "$isolation_cache_dir" \
-    && -f "$isolation_cache_dir/.godot/global_script_class_cache.cfg" \
-    && -f "$isolation_cache_dir/source-key" \
-    && "$(cat "$isolation_cache_dir/source-key")" == "$source_key" ]]; then
-  cp -R "$isolation_cache_dir/.godot" "$project_root/.godot"
-  if [[ -d "$isolation_cache_dir/font-remaps" ]]; then
-    cp "$isolation_cache_dir/font-remaps/"*.import "$project_root/game/ui/fonts/"
-  fi
+cache_entry="${isolation_cache_dir:+$isolation_cache_dir/$source_key}"
+if [[ "$(uname -s)" == "Darwin" && -n "$cache_entry" \
+    && -f "$cache_entry/complete" \
+    && -f "$cache_entry/.godot/global_script_class_cache.cfg" \
+    && -d "$cache_entry/resource-remaps" ]]; then
+  cp -R "$cache_entry/.godot" "$project_root/.godot"
+  cp -R "$cache_entry/resource-remaps/." "$project_root/"
+  printf 'KEEUM_IMPORT_CACHE=hit:%s\n' "$source_key"
 elif [[ ! -f "$project_root/.godot/global_script_class_cache.cfg" ]]; then
+  printf 'KEEUM_IMPORT_CACHE=miss:%s\n' "$source_key"
   set +e
   run_godot "$godot_bin" --headless --path "$project_root" --import --quit \
     > "$run_root/import.log" 2>&1
@@ -194,12 +201,33 @@ elif [[ ! -f "$project_root/.godot/global_script_class_cache.cfg" ]]; then
     exit 96
   fi
   if [[ "$(uname -s)" == "Darwin" && -n "$isolation_cache_dir" ]]; then
-    mkdir -p "$isolation_cache_dir"
-    mkdir -p "$isolation_cache_dir/.godot"
-    cp -R "$project_root/.godot/." "$isolation_cache_dir/.godot/"
-    printf '%s\n' "$source_key" > "$isolation_cache_dir/source-key"
-    mkdir -p "$isolation_cache_dir/font-remaps"
-    cp "$project_root/game/ui/fonts/"*.import "$isolation_cache_dir/font-remaps/"
+    # 완성된 캐시만 공개한다. 동시 실행도 작성 중인 디렉터리를 읽지 않는다.
+    python3 - "$project_root" "$cache_entry" <<'PYCACHE'
+import errno, os, shutil, sys, tempfile
+from pathlib import Path
+project, entry = map(Path, sys.argv[1:])
+entry.parent.mkdir(parents=True, exist_ok=True)
+with tempfile.TemporaryDirectory(prefix='.keeum-cache-', dir=entry.parent) as temporary:
+    staged = Path(temporary) / 'entry'
+    shutil.copytree(project / '.godot', staged / '.godot')
+    remaps = staged / 'resource-remaps'
+    remaps.mkdir()
+    for folder in ['addons', 'assets', 'core', 'data', 'game', 'tools']:
+        for source in (project / folder).rglob('*.import'):
+            destination = remaps / source.relative_to(project)
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source, destination)
+    (staged / 'complete').write_text('2\n')
+    try:
+        os.rename(staged, entry)
+    except OSError as error:
+        if error.errno not in (errno.EEXIST, errno.ENOTEMPTY) or not (
+            (entry / 'complete').is_file()
+            and (entry / '.godot/global_script_class_cache.cfg').is_file()
+            and (entry / 'resource-remaps').is_dir()
+        ):
+            raise
+PYCACHE
   fi
 fi
 

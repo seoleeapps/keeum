@@ -815,7 +815,28 @@
         "cg_happy_ordinary.png"
       ],
       "provider": "Codex built-in gpt-image-2",
-      "generated_at": "2026-10-21"
+      "generated_at": "2026-10-21",
+      "final_canvas": {
+        "width": 1920,
+        "height": 1080
+      },
+      "refinements": [
+        {
+          "date": "2026-10-21",
+          "provider": "Codex built-in gpt-image-2",
+          "prompt": "Edit image 1 (university acceptance ending) only. Keep the central child's face, hair, blue cardigan, cream acceptance envelope, fantasy campus architecture, spring blossoms, soft warm light, dark brown outlines and rounded picture-book style. Change BOTH parents to be seen strictly from behind: two adults in the near left/right foreground facing the child, only backs of their heads, backs, and supportive hands visible. No parent eyes, nose, mouth, profile or front-facing blank face. Recompose their placement naturally as needed, while retaining a clear cheerful child in the middle and the campus. Image 2 is the approved ending style reference and shows the required backs-only parents. Image 3 is the character/style anchor, not a layout to copy. Landscape 16:9 full-bleed opaque illustration; no writing, logos, watermark or borders.",
+          "refs": [
+            "raw/cg_major_univ-v1.png",
+            "cg_happy_ordinary.png",
+            "style/anchor.jpg"
+          ],
+          "original_source": "raw/cg_major_univ-v1.png",
+          "original_sha256": "1fc6abe8ea32297ecd29a2675458eb36066a3309f341750bff35d680f1511eaa",
+          "source": "raw/cg_major_univ.png",
+          "source_sha256": "e4bc08785f2f741fd53e17c3b2449ba6bff75bf0f77d0a9bb4c664a004502829",
+          "reason": "04-art-audio-bible.md의 부모는 손, 뒷모습, 실루엣으로만 표현하는 규칙 유지"
+        }
+      ]
     },
     {
       "name": "cg_artisan",
@@ -827,7 +848,28 @@
         "cg_happy_ordinary.png"
       ],
       "provider": "Codex built-in gpt-image-2",
-      "generated_at": "2026-10-21"
+      "generated_at": "2026-10-21",
+      "final_canvas": {
+        "width": 1920,
+        "height": 1080
+      },
+      "refinements": [
+        {
+          "date": "2026-10-21",
+          "provider": "Codex built-in gpt-image-2",
+          "prompt": "Edit image 1 (woodworking artisan ending) with one targeted composition correction: keep the central child, face, hairstyle, sage apron, completed wooden bird, wood tools, cozy workshop and warm picture-book palette and dark brown outlines. BOTH parents must be seen ONLY FROM BEHIND, placed naturally at the near left and right foreground looking toward the child. Show back of adult heads, shoulders and proud clapping/supportive hands only; no adult eyes, nose, mouth or profile. Keep the bird and child's expression unobscured. Image 2 is approved style/composition guidance for backs-only parents, image 3 is character/style anchor. Preserve the full workshop atmosphere, no readable words, brands, logos, watermarks. Opaque full-bleed 16:9 landscape.",
+          "refs": [
+            "raw/cg_artisan-v1.png",
+            "cg_happy_ordinary.png",
+            "style/anchor.jpg"
+          ],
+          "original_source": "raw/cg_artisan-v1.png",
+          "original_sha256": "23887a4a2dfe5dbfb689302e41f1a01555c3ac4ea9d0d46e8e1d409f352439e0",
+          "source": "raw/cg_artisan.png",
+          "source_sha256": "c79a1c35d040fb19409bb03e275a47fdfdc0cdbe0a3b99d85fd6f581830e4521",
+          "reason": "04-art-audio-bible.md의 부모는 손, 뒷모습, 실루엣으로만 표현하는 규칙 유지"
+        }
+      ]
     },
     {
       "name": "cg_late_bloomer",
@@ -839,7 +881,28 @@
         "cg_happy_ordinary.png"
       ],
       "provider": "Codex built-in gpt-image-2",
-      "generated_at": "2026-10-21"
+      "generated_at": "2026-10-21",
+      "final_canvas": {
+        "width": 1920,
+        "height": 1080
+      },
+      "refinements": [
+        {
+          "date": "2026-10-21",
+          "provider": "Codex built-in gpt-image-2",
+          "prompt": "Edit only image 1 (late bloomer restarting study at a spring window). Preserve child's face/hair, blue cardigan, open notebook and pencil, cozy desk, books, flowers and warm light, chunky rounded shapes and dark brown outlines. Remove visible adult faces. The parents are the player's projected presence and may appear ONLY as partial hands/back silhouettes. Replace the mother on the right with only a cropped sleeve and supportive hand offering the existing mug at desk level from the right edge; no head. Remove the father in the left doorway entirely and leave a warm empty doorway, or only an unobtrusive back-facing shoulder at the far edge with no facial features/profile. The child remains the focal point and is studying with quiet encouragement. Image 2 is approved ending/style reference (adults seen from behind only); image 3 is style/character anchor. Full-bleed opaque 16:9 landscape; no writing or logos/watermarks.",
+          "refs": [
+            "raw/cg_late_bloomer-v1.png",
+            "cg_happy_ordinary.png",
+            "style/anchor.jpg"
+          ],
+          "original_source": "raw/cg_late_bloomer-v1.png",
+          "original_sha256": "8acc16caf5ba03363caaa181e9d57263b2479cb23296f4584ebdb83b695b5fbf",
+          "source": "raw/cg_late_bloomer.png",
+          "source_sha256": "5973f874330a44c246666be57071a1f1dc9c28125268ca17c11a3a4b8bfa3bca",
+          "reason": "04-art-audio-bible.md의 부모는 손, 뒷모습, 실루엣으로만 표현하는 규칙 유지"
+        }
+      ]
     },
     {
       "name": "cg_science_maker",
@@ -851,7 +914,28 @@
         "cg_happy_ordinary.png"
       ],
       "provider": "Codex built-in gpt-image-2",
-      "generated_at": "2026-10-21"
+      "generated_at": "2026-10-21",
+      "final_canvas": {
+        "width": 1920,
+        "height": 1080
+      },
+      "refinements": [
+        {
+          "date": "2026-10-21",
+          "provider": "Codex built-in gpt-image-2",
+          "prompt": "Edit image 1 (science maker child demonstrating a little wheeled robot). Keep the child's face, hair and blue cardigan, the little robot and safe hand tools on workbench, cozy workshop windows/plants, warm palette, rounded picture-book style and dark brown outlines. Change both adults so their heads and faces are entirely out of frame: suggest parents only with cropped shoulders/backs at the extreme edges and supportive clapping hands. Prefer foreground back-of-head silhouettes if a head is necessary, always facing away from viewer toward child. No adult eyes, nose, mouth, facial profile or blank front-facing face. Keep robot and child unobscured, balanced composition. Image 2 defines approved backs-only parent treatment; image 3 is style/character anchor. Full-bleed 16:9 opaque landscape, no readable text, brands, logos, watermark or borders.",
+          "refs": [
+            "raw/cg_science_maker-v1.png",
+            "cg_happy_ordinary.png",
+            "style/anchor.jpg"
+          ],
+          "original_source": "raw/cg_science_maker-v1.png",
+          "original_sha256": "835f5b30139e369ba98b5e91e3c6256a91136d173212b9f3d47c2f9310608c30",
+          "source": "raw/cg_science_maker.png",
+          "source_sha256": "bcd9aa25d12d0e5b1f4f8beb89041487c48e0e92e46b3f2b8d4ef7a969041791",
+          "reason": "04-art-audio-bible.md의 부모는 손, 뒷모습, 실루엣으로만 표현하는 규칙 유지"
+        }
+      ]
     },
     {
       "name": "cg_sports_team",
@@ -863,7 +947,11 @@
         "cg_happy_ordinary.png"
       ],
       "provider": "Codex built-in gpt-image-2",
-      "generated_at": "2026-10-21"
+      "generated_at": "2026-10-21",
+      "final_canvas": {
+        "width": 1920,
+        "height": 1080
+      }
     },
     {
       "name": "cg_family_cafe",
@@ -875,7 +963,28 @@
         "cg_happy_ordinary.png"
       ],
       "provider": "Codex built-in gpt-image-2",
-      "generated_at": "2026-10-21"
+      "generated_at": "2026-10-21",
+      "final_canvas": {
+        "width": 1920,
+        "height": 1080
+      },
+      "refinements": [
+        {
+          "date": "2026-10-21",
+          "provider": "Codex built-in gpt-image-2",
+          "prompt": "Edit image 1 (family preparing a small cozy cafe). Keep central child and sage apron, face/hair, cafe counter and cups, potted plants and spring window, warm rounded picture-book shapes, brown outlines and palette. Correct the parents: no adult faces should be visible. Recompose as viewed from customer side with child facing camera behind counter, and the two parents in near left/right foreground seen strictly from behind, working together. One parent's cropped hands arrange a small plant, the other's hands dry a cup; back-of-head and backs only, never eyes, nose, mouth or profiles. Keep child and cafe work clearly visible and cozy, not crowded. Image 2 is approved ending illustration showing parents' required backs-only treatment. Image 3 is the character/style anchor. Full-bleed opaque 16:9 landscape; no readable signs, menu text, logos, brands or watermarks.",
+          "refs": [
+            "raw/cg_family_cafe-v1.png",
+            "cg_happy_ordinary.png",
+            "style/anchor.jpg"
+          ],
+          "original_source": "raw/cg_family_cafe-v1.png",
+          "original_sha256": "5c1578bece5d49d385054f5234d616ca002a499bb95f163469aa3c0cba920313",
+          "source": "raw/cg_family_cafe.png",
+          "source_sha256": "24a7510205d677304e225d3bf82e8372b405d149d3ebeb4117cd35f4a887a0f3",
+          "reason": "04-art-audio-bible.md의 부모는 손, 뒷모습, 실루엣으로만 표현하는 규칙 유지"
+        }
+      ]
     }
   ]
 }
