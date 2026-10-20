@@ -8,27 +8,39 @@
   "contactPhone": "+821050675746",
   "privacyPolicyUrl": "https://www.seorilabs.com/apps/keeum/privacy/",
   "storeListing": {
-    "appName": {"ko-KR": "내 새끼 대학 보내기"},
-    "shortDescription": {"ko-KR": "아이의 속도를 살피며, 대학 입시까지 함께 자라는 그림책 육성 게임"},
-    "fullDescription": {"ko-KR": "오늘부터 당신은 이 아이의 부모입니다.\n\n유아기부터 입시까지, 매달 학습과 여가 활동을 골라 아이와 함께 자라 보세요. 성적만큼 마음과 체력, 가족 사이의 유대도 살펴야 합니다.\n\n• 24가지 활동으로 만드는 우리 집의 한 달\n그림책 읽기와 숫자 놀이부터 학원, 운동, 가족 대화까지 아이에게 맞는 시간을 골라 보세요. 같은 활동도 아이의 성향과 컨디션에 따라 달라집니다.\n\n• 선택으로 만나는 48가지 이야기\n친구와 다툰 날, 작게 반짝인 재능, 문을 닫은 사춘기. 부모의 선택이 아이와의 관계에 작은 흔적을 남깁니다.\n\n• 40가지 엔딩과 12장의 전용 그림\n원하던 대학, 좋아하는 일을 찾은 길, 잠시 쉬어 가는 시간. 서로 다른 결말을 도감에 모으고 다음 아이와 새 이야기를 시작하세요.\n\n• 무료로 모은 젬으로 꾸미기\n회차 보상과 선택형 광고 보상으로 젬을 모아 코스메틱을 뽑을 수 있습니다. 확률과 천장을 공개하며, 꾸미기 아이템은 성장과 엔딩에 영향을 주지 않습니다. 앱 내 결제는 없습니다.\n\n로그인 없이 기기에 진행을 저장합니다. 보상형 광고는 직접 선택하며 일부 학기 정산 뒤에는 전면 광고가 표시될 수 있습니다. 광고를 보지 않아도 기본 활동으로 끝까지 진행할 수 있습니다.\n\n대학, 학원, 강사와 상품명은 모두 가상입니다. 실존 기관이나 인물과 무관하며, 게임 속 부적절한 선택을 권장하지 않습니다.\n\n문의: cs@seorilabs.com"}
+    "appName": {
+      "ko-KR": "내 새끼 대학 보내기"
+    },
+    "shortDescription": {
+      "ko-KR": "아이의 속도를 살피며, 대학 입시까지 함께 자라는 그림책 육성 게임"
+    },
+    "fullDescription": {
+      "ko-KR": "오늘부터 당신은 이 아이의 부모입니다.\n\n유아기부터 입시까지, 매달 학습과 여가 활동을 골라 아이와 함께 자라 보세요. 성적만큼 마음과 체력, 가족 사이의 유대도 살펴야 합니다.\n\n• 24가지 활동으로 만드는 우리 집의 한 달\n그림책 읽기와 숫자 놀이부터 학원, 운동, 가족 대화까지 아이에게 맞는 시간을 골라 보세요. 같은 활동도 아이의 성향과 컨디션에 따라 달라집니다.\n\n• 선택으로 만나는 48가지 이야기\n친구와 다툰 날, 작게 반짝인 재능, 문을 닫은 사춘기. 부모의 선택이 아이와의 관계에 작은 흔적을 남깁니다.\n\n• 40가지 엔딩과 12장의 전용 그림\n원하던 대학, 좋아하는 일을 찾은 길, 잠시 쉬어 가는 시간. 서로 다른 결말을 도감에 모으고 다음 아이와 새 이야기를 시작하세요.\n\n• 무료로 모은 젬으로 꾸미기\n회차 보상과 선택형 광고 보상으로 젬을 모아 코스메틱을 뽑을 수 있습니다. 확률과 천장을 공개하며, 꾸미기 아이템은 성장과 엔딩에 영향을 주지 않습니다. 앱 내 결제는 없습니다.\n\n로그인 없이 기기에 진행을 저장합니다. 보상형 광고는 직접 선택하며 일부 학기 정산 뒤에는 전면 광고가 표시될 수 있습니다. 광고를 보지 않아도 기본 활동으로 끝까지 진행할 수 있습니다.\n\n대학, 학원, 강사와 상품명은 모두 가상입니다. 실존 기관이나 인물과 무관하며, 게임 속 부적절한 선택을 권장하지 않습니다.\n\n문의: cs@seorilabs.com"
+    }
   },
   "assets": {
     "playIcon": "play-store/assets/icon-512.png",
     "featureGraphic": "play-store/assets/feature-graphic-1024x500.png",
-    "phoneScreenshots": ["play-store/screenshots/phone/home.png", "play-store/screenshots/phone/activity.png", "play-store/screenshots/phone/ending.png"],
+    "phoneScreenshots": [
+      "play-store/screenshots/phone/home.png",
+      "play-store/screenshots/phone/activity.png",
+      "play-store/screenshots/phone/ending.png"
+    ],
     "sevenInchTabletScreenshots": [],
     "tenInchTabletScreenshots": []
   },
   "contentDeclarations": {
-    "dataSafety": "확정 필요: 실제 SDK와 Console 설문 대조",
-    "contentRating": "확정 필요: IARC 응답과 실제 결과 확인",
-    "targetAudience": "adult-parents-not-children",
+    "dataSafety": "completed-in-play-console: 2026-10-21; GMA Next-Gen SDK disclosure; final AAB review pending",
+    "contentRating": "completed-in-play-console: 2026-10-21; IARC questionnaire saved",
+    "targetAudience": "completed-in-play-console: 2026-10-21; age 18 and older",
     "ads": "yes",
     "koreaDistribution": "yes",
-    "koreaGameRating": "확정 필요: 한국 게임 등급 결과 확인"
+    "koreaGameRating": "completed-in-play-console: 2026-10-21; IARC GRAC 전체이용가; review may revise"
   },
   "release": {
     "track": "internal",
-    "releaseNotes": {"ko-KR": "매달의 선택으로 아이와 함께 자라는 육성 게임입니다. 24가지 활동, 48가지 이벤트와 40가지 엔딩을 만나 보세요."}
+    "releaseNotes": {
+      "ko-KR": "매달의 선택으로 아이와 함께 자라는 육성 게임입니다. 24가지 활동, 48가지 이벤트와 40가지 엔딩을 만나 보세요."
+    }
   }
 }
