@@ -144,7 +144,7 @@ run_cleanup_ownership_case() {
   printf 'untouched\n' > "$outside_marker"
 
   local script
-  script="$(mktemp "${TMPDIR:-/tmp}/keeum-cleanup-case.XXXXXX.sh")"
+  script="$(mktemp "${TMPDIR:-/tmp}/keeum-cleanup-case.XXXXXX")"
   cat > "$script" <<EOS
 #!/usr/bin/env bash
 set -euo pipefail

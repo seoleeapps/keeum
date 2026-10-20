@@ -2,14 +2,16 @@
 
 게임 진행은 기기에 저장하며 운영자에게 보내지 않는다. 로그인, Firebase, 클라우드 저장, 결제와 별도 이용 분석은 없다. 광고 제공자의 수집과 전송은 별도로 신고해야 한다.
 
-- Google Mobile Ads와 UMP: IP 주소로 추정하는 대략적 위치, 광고 상호작용, 진단 정보, 기기 식별자.
+- GMA Next-Gen SDK 1.4.0과 UMP: IP 주소로 추정하는 대략적 위치, 광고 상호작용, 진단 정보, 기기 식별자.
 - 목적: 광고 제공과 측정, 진단과 부정 이용 방지. 실제 Play Console의 하위 유형, 공유의 서비스 제공자 예외와 선택 여부를 현재 SDK 공개 자료에 맞춰 확인한다.
 - 전송 중 암호화. 앱 운영자는 광고 제공자가 수집한 전체 데이터를 직접 삭제할 수 없다. Android 광고 식별자 설정과 제공자의 개인정보 선택 경로를 안내한다.
 - 가상 자녀의 이름은 로컬 사용자 입력이다. 실제 개인정보를 입력할 필요가 없으며 외부로 보내지 않는다.
 - 게임 초기화 뒤 복구용 이전 백업과 결과 카드는 남을 수 있다. 앱 데이터 삭제로 앱 내부 데이터를 제거한다.
 
 공식 확인 자료:
-- https://developers.google.com/admob/android/privacy/play-data-disclosure
+- https://developers.google.com/admob/android/next-gen/privacy/play-data-disclosure
 - https://developers.google.com/admob/android/privacy
 
-상태: Console 설문과 최종 SDK AAB 검토 전. 이 문서는 제출 완료 근거가 아니다.
+2026-10-21 Seolee Apps의 com.seorilabs.keeum Console에 설문을 저장하고 미리보기를 다시 읽었다. 신고 유형은 대략적인 위치, 앱 상호작용, 진단, 기타 앱 성능 데이터와 기기 또는 기타 ID다. 각 유형은 SDK의 수집과 공유, 광고 또는 마케팅, 애널리틱스, 사기 예방과 보안 목적이다. 임시 처리로 면제하지 않았으며 자동 SDK 요청이 있어 필수 수집으로 표기했다. 계정 생성과 외부 계정 로그인은 없고 광고 제공자 데이터 삭제 요청 기능은 제공하지 않는다. 전송 중 암호화를 신고했다.
+
+최종 SDK AAB의 권한과 의존성 검토는 남아 있다. Console 저장과 심사 제출, 승인과 공개는 별도 상태다. 비정상 종료 로그는 별도 Crashlytics나 수집 구현이 없으며 SDK 공개 자료에 명시된 진단과 성능 유형으로 신고했다.
