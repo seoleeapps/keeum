@@ -23,6 +23,8 @@
 
 승인 범위: docs/design/2026-10-21-google-play-launch. 실행 이슈: https://github.com/seoleeapps/keeum/issues/60
 
+태그 생성, 번호 원장 초기화와 재빌드 없는 내부 테스트에서 프로덕션 승격은 각각 중앙 재사용 워크플로를 호출한다. 태그와 원장 초기화는 기본 계산 전용이며 main이나 PR에서 실행하지 않는다. 첫 태그는 v1.0.0을 명시하고, 원장은 실제 Play 버전 조회 결과로만 초기화한다. 태그 생성 전 같은 후보의 개발 검수와 서명 준비를 완료한다. 서명 AAB만 확인할 때는 deploy-google-play.yml의 upload=false를 사용하며, 이 경우도 중앙 before-build 검증을 생략하지 않는다.
+
 개인정보처리방침은 https://github.com/seorilabs/seorilabs-official/pull/83 에서 병합, 배포했다. 실제 URL의 HTTP 200과 본문을 읽어 확인한다.
 
 필수 남은 항목은 프로덕션 키 신규 등록, 실제 Android 광고 SDK와 UMP 검증, 최종 SHA CI와 독립 UI 검수, AAB 검증, 최종 AAB에 대한 데이터 보안과 IARC 재확인, 테스트와 심사, 공개 스토어와 최소 실행 확인이다. 출시 지시는 공개까지 유효하며, 별도 기기 사용과 자격증명 생성 승인은 대신하지 않는다.

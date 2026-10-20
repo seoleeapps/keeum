@@ -8,6 +8,10 @@ on:
         description: '출시할 exact SemVer 태그'
         required: true
         type: string
+      upload:
+        description: '서명 AAB를 내부 테스트에 업로드'
+        type: boolean
+        default: true
 permissions:
   contents: read
   actions: read
@@ -20,6 +24,7 @@ jobs:
     uses: seorilabs/.github/.github/workflows/godot-deploy-google-play.yml@main
     with:
       release_tag: ${{ inputs.release_tag || github.ref_name }}
+      upload: ${{ github.event_name != 'workflow_dispatch' || inputs.upload }}
       package_name: com.seorilabs.keeum
       godot_version: '4.7.2'
       scripts_dir: scripts
