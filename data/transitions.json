@@ -1,5 +1,5 @@
 {
-  "_note": "전환기 기질 재형성 이벤트. 성공 확률 = f(유대감) + 정합 보정 + 정서 보정. 광고 부스트 +20%p 1회. 유료로 성향을 바꾸지 않는다.",
+  "_note": "전환기 기질 재형성 이벤트. 성공 확률 = f(유대감) + 정합 보정 + 정서 보정. 가족 대화에는 광고를 노출하지 않는다.",
   "transitions": [
     {
       "gate": "infant_elementary", "from_stage": "infant", "to_stage": "elementary",

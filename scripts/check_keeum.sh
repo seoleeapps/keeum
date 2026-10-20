@@ -36,6 +36,7 @@ trap cleanup EXIT
 # 검증 도구 자체가 격리 없이는 실제 저장을 건드리지 않는지 먼저 회귀 검사한다(#17).
 bash "$repo_root/scripts/check_save_isolation.sh"
 python3 "$repo_root/scripts/check_activity_art.py"
+python3 "$repo_root/scripts/check_launch_content.py"
 
 # 세이브 스키마 버전 판독 지점을 지운 변이에서 회귀 검사가 실패하는지 확인한다(#45).
 bash "$repo_root/scripts/check_save_schema_self_test.sh"
@@ -81,6 +82,12 @@ run_godot_check \
   "모든 검증 통과" \
   "$repo_root/scripts/run_godot_isolated.sh" "autoplay" -- \
     --headless --script res://tools/autoplay.gd
+
+run_godot_check \
+  "launch-checks" \
+  "엔딩 조건 도달 검사 40/40" \
+  "$repo_root/scripts/run_godot_isolated.sh" "launch-checks" -- \
+    --headless --script res://tools/launch_checks.gd
 
 run_godot_check \
   "ui-smoke" \

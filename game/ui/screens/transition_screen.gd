@@ -1,15 +1,13 @@
 class_name TransitionScreen
 extends UIScreen
 ## SCR-006 계열 전환기 대화. 기질 재형성 — 성공 확률 = f(유대감). 감정 클라이맥스.
-## 유료 가챠로 성향을 바꾸지 않는다. 보상형 부스트(+20%p)만 1회 허용.
+## 가족 대화에서는 광고와 꾸미기를 노출하지 않는다.
 ## 연출은 라이팅 변화 중심(04 문서: 파티클 과용 금지) — 웜 비네트 심화 → 결과 워프.
 
 var _transition: Dictionary
 var _run: GameRun
-var _use_ad := false
 var _chance_label: Label
 var _option_box: VBoxContainer
-var _ad_btn: Button
 var _result_label: Label
 var _next_btn: Button
 var _vignette: TextureRect
@@ -67,14 +65,6 @@ func enter(data: Variant = null) -> void:
 	v.add_child(_result_label)
 	body.add_child(panel)
 
-	# 어댑터 미연동이거나 세션 8회/일일 18회 캡에 닿았으면 부스트 버튼 자체를
-	# 만들지 않는다(#34) — ShopCatalog(#31)와 같은 규칙.
-	if AdGateway.can_open(GameController.profile):
-		_ad_btn = UIKit.icon_button("film", "진심이 닿는 시간 (+20%p)")
-		_ad_btn.disabled = not _run.can_use_ad_boost(_transition)
-		_ad_btn.pressed.connect(_toggle_ad)
-		root.add_child(_ad_btn)
-
 	_next_btn = UIKit.button("다음", true)
 	_next_btn.visible = false
 	_next_btn.pressed.connect(func() -> void:
@@ -122,20 +112,12 @@ func _build_options() -> void:
 		var b := UIKit.button("%s — %s" % [opt.get("label", ""), opt.get("desc", "")])
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		b.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		b.custom_minimum_size = Vector2(0, 72)
+		b.custom_minimum_size = Vector2(0, UIKit.TOUCH_MIN)
 		b.pressed.connect(_resolve.bind(i))
 		_option_box.add_child(b)
 
-func _toggle_ad() -> void:
-	_use_ad = not _use_ad
-	AudioBus.chime()
-	(_ad_btn.get_meta("icon_node") as GameIcon).set_kind("check" if _use_ad else "film")
-	if _use_ad and not reduce_motion():
-		DeltaPopup.spawn(self, Vector2(size.x * 0.5 + 60, size.y * 0.45), "+20%p", UIKit.SAGE, false, "heart")
-	_update_chance()
-
 func _update_chance() -> void:
-	var pct := int(round(_run.transition_success_chance(_transition, _use_ad) * 100.0))
+	var pct := int(round(_run.transition_success_chance(_transition) * 100.0))
 	if reduce_motion():
 		_chance_label.text = "성공 확률 %d%%" % pct
 	else:
@@ -143,16 +125,10 @@ func _update_chance() -> void:
 	_last_pct = pct
 
 func _resolve(index: int) -> void:
-	# 상태 변경·저장은 연출 전에 동기 완료(중단 안전). 부스트를 실제로 쓴 순간에만
-	# 캡을 charge한다 — 토글만 하고 선택지를 누르지 않은 시청은 캡에 들지 않는다.
-	if _use_ad:
-		AdGateway.record_shown(GameController.profile)
-	var out := _run.resolve_transition(_transition, index, _use_ad)
+	var out := _run.resolve_transition(_transition, index)
 	GameController.track("raise_event_choice", {"event_id": _transition.get("gate", ""), "choice": index})
 	for c: Node in _option_box.get_children():
 		c.visible = false
-	if _ad_btn != null:
-		_ad_btn.visible = false
 	_chance_label.visible = false
 	GameController.save_game()
 	if reduce_motion():

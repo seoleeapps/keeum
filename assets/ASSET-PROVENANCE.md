@@ -49,3 +49,10 @@ afplay assets/audio/sting_new_ending.wav
 afplay assets/audio/sting_gacha_special.wav
 afplay assets/audio/sfx/tap.ogg
 ```
+
+## 2026-10-21 추가 엔딩 CG
+
+- cg_major_univ, cg_artisan, cg_late_bloomer, cg_science_maker, cg_sports_team, cg_family_cafe
+- 생성: Codex 내장 gpt-image-2. 별도 유료 API 호출 없음. 기존 cg_happy_ordinary를 스타일 참조로 사용.
+- 원본: assets/art/raw, 게임용 크기: 1920x1080. 생성 원본은 export 제외.
+- 화면별 요청 내용: asset-manifest.json의 해당 항목.

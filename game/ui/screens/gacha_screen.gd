@@ -5,9 +5,9 @@ extends UIScreen
 ## 리브얼 연출: 선물 상자 → 순차 공개(탭=전량 즉시). 페이크·니어미스·재촉 없음(압박형 금지).
 ## 확률·천장 패널은 리브얼 중에도 가리지 않는다.
 
-const PROB_SPECIAL := 0.03
-const PROB_RARE := 0.17
-const PITY := 40
+const PROB_SPECIAL := CosmeticDraw.PROB_SPECIAL
+const PROB_RARE := CosmeticDraw.PROB_RARE
+const PITY := CosmeticDraw.PITY
 const COST_SINGLE := 150
 const COST_TEN := 1350
 const MILEAGE := {"special": 100, "rare": 20, "normal": 5}
@@ -44,7 +44,7 @@ func enter(_data: Variant = null) -> void:
 	var disc := UIKit.panel(UIKit.CARD, 18)
 	var dv := UIKit.vbox(6)
 	disc.add_child(dv)
-	dv.add_child(UIKit.label("확률 공개 (유상·무상 통합 동일)", 24, UIKit.TEXT))
+	dv.add_child(UIKit.label("확률 공개 (무료로 모은 젬 사용)", 24, UIKit.TEXT))
 	dv.add_child(_prob_row("스페셜 (테마·펫)", "3.0%", UIKit.TALENT))
 	dv.add_child(_prob_row("레어 (코스튬 세트)", "17.0%", UIKit.BLUE))
 	dv.add_child(_prob_row("일반 (파츠·소품)", "80.0%", UIKit.SAGE))
@@ -74,7 +74,7 @@ func enter(_data: Variant = null) -> void:
 	_results = UIKit.vbox(8)
 	body.add_child(_results)
 
-	var back := UIKit.button("상점으로")
+	var back := UIKit.button("꾸미기로")
 	back.pressed.connect(func() -> void:
 		AudioBus.tap()
 		router.goto("shop"))
@@ -100,7 +100,7 @@ func _pull(count: int, cost: int) -> void:
 		return
 	var p: Profile = GameController.profile
 	if p.premium < cost:
-		router.toast("젬이 부족해요 (일일 무료 통화·업적으로도 모을 수 있어요)")
+		router.toast("젬이 부족해요. 회차 보상과 홈의 광고 보상으로 모을 수 있어요")
 		AudioBus.stress_nudge()
 		return
 	p.add_premium(-cost)
@@ -132,7 +132,7 @@ func _play_reveal(results: Array, got_special: bool) -> void:
 	_revealing = true
 	_skip = false
 	var box := UIKit.button("")
-	box.custom_minimum_size = Vector2(0, 120)
+	box.custom_minimum_size = Vector2(0, UIKit.TOUCH_MIN)
 	var bv := UIKit.vbox(4)
 	bv.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	bv.alignment = BoxContainer.ALIGNMENT_CENTER
@@ -194,19 +194,9 @@ func _delay_or_skip(sec: float) -> void:
 
 func _draw_one(p: Profile) -> Dictionary:
 	p.gacha_pity += 1
-	var tier := ""
-	if p.gacha_pity >= PITY:
-		tier = "special"
-		p.gacha_pity = 0
-	else:
-		var r := _rng.randf()
-		if r < PROB_SPECIAL:
-			tier = "special"
-			p.gacha_pity = 0
-		elif r < PROB_SPECIAL + PROB_RARE:
-			tier = "rare"
-		else:
-			tier = "normal"
+	var roll := 1.0 if p.gacha_pity >= PITY else _rng.randf()
+	var tier := CosmeticDraw.tier_for_roll(roll, p.gacha_pity)
+	if tier == "special": p.gacha_pity = 0
 	var pool: Array = POOL[tier]
 	var item := str(pool[_rng.randi() % pool.size()])
 	var dup := p.owned_cosmetics.has(item)

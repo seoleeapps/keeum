@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 2,
+  "e2e": {
+    "workflow": ".github/workflows/godot-checks.yml",
+    "command": "npm run test:e2e"
+  },
+  "platformPaths": [
+    "export_presets.cfg"
+  ],
+  "features": [
+    {
+      "id": "core-loop",
+      "core": true,
+      "paths": [
+        "core/**",
+        "game/ui/screens/onboarding_screen.gd",
+        "game/ui/screens/activity_screen.gd",
+        "game/ui/screens/result_screen.gd",
+        "game/ui/screens/home_screen.gd"
+      ]
+    },
+    {
+      "id": "events-endings",
+      "core": true,
+      "paths": [
+        "data/**",
+        "game/ui/screens/event_screen.gd",
+        "game/ui/screens/transition_screen.gd",
+        "game/ui/screens/ending_screen.gd",
+        "game/ui/screens/codex_screen.gd"
+      ]
+    },
+    {
+      "id": "cosmetics",
+      "core": false,
+      "paths": [
+        "game/ui/screens/shop_screen.gd",
+        "game/ui/screens/gacha_screen.gd",
+        "game/ui/screens/mileage_exchange_screen.gd"
+      ],
+      "foundation": true
+    },
+    {
+      "id": "save",
+      "core": false,
+      "paths": [
+        "core/profile.gd",
+        "core/save_schema.gd",
+        "game/adapter/local_save.gd",
+        "game/autoload/game_controller.gd"
+      ],
+      "foundation": true
+    },
+    {
+      "id": "settings",
+      "core": false,
+      "paths": [
+        "game/autoload/settings.gd",
+        "game/ui/screens/settings_screen.gd"
+      ]
+    },
+    {
+      "id": "ads",
+      "core": false,
+      "paths": [
+        "game/adapter/ad_gateway.gd",
+        "game/adapter/ads/**",
+        "data/monetization/**"
+      ],
+      "foundation": true,
+      "platformPaths": [
+        "game/adapter/ads/admob_android.gd",
+        "addons/admob/**"
+      ]
+    }
+  ]
+}

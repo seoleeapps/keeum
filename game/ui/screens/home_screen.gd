@@ -74,9 +74,18 @@ func enter(_data: Variant = null) -> void:
 	root.add_child(cta)
 	_pulse_cta(cta)
 
+	if AdGateway.can_open(GameController.profile, "daily_gems"):
+		var daily := UIKit.icon_button("film", "광고 보고 60젬 (하루 1회)")
+		daily.pressed.connect(func() -> void:
+			daily.disabled = true
+			if not AdGateway.request_rewarded(GameController.profile, "daily_gems",
+				GameController.save_game, _daily_finished):
+				daily.disabled = false)
+		root.add_child(daily)
+
 	# 보조 행동
 	var nav := UIKit.hbox(10)
-	for item: Array in [["book", "도감", "codex"], ["bag", "상점", "shop"], ["gear", "설정", "settings"]]:
+	for item: Array in [["book", "도감", "codex"], ["bag", "꾸미기", "shop"], ["gear", "설정", "settings"]]:
 		var b := UIKit.icon_button(str(item[0]), str(item[1]), false, 22)
 		b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		b.pressed.connect(func() -> void:
@@ -193,3 +202,9 @@ func _fill_wardrobe(list: VBoxContainer) -> void:
 		list.add_child(row)
 	if list.get_child_count() == 0:
 		list.add_child(UIKit.label("아직 코스메틱이 없어요. 뽑기에서 만나요!", 24, UIKit.TEXT_SOFT))
+
+func _daily_finished(earned: bool) -> void:
+	GameController.save_game()
+	if not is_inside_tree(): return
+	router.toast("60젬을 받았어요" if earned else "광고를 완료하지 못했어요. 게임은 계속할 수 있어요")
+	router.goto("home")

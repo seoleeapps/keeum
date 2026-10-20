@@ -1,0 +1,22 @@
+{
+  "rewarded": {
+    "session_cap": 8,
+    "daily_cap": 18,
+    "cooldown_seconds": 60
+  },
+  "daily_gems": {
+    "amount": 60,
+    "daily_cap": 1
+  },
+  "interstitial": {
+    "first_session": 2,
+    "session_cap": 2,
+    "daily_cap": 4,
+    "cooldown_seconds": 180,
+    "after_rewarded_seconds": 180
+  },
+  "android": {
+    "rewarded_unit_id": "ca-app-pub-9932778305312246/1213916766",
+    "interstitial_unit_id": "ca-app-pub-9932778305312246/6386352398"
+  }
+}

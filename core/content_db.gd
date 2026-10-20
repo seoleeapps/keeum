@@ -26,6 +26,7 @@ func load_all() -> bool:
 	transitions = _read_json("transitions.json").get("transitions", [])
 	var e := _read_json("endings.json")
 	endings = e.get("endings", [])
+	endings.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return int(a.get("priority", 0)) > int(b.get("priority", 0)))
 	applications = e.get("applications", {})
 	profiles = _read_json("profiles.json")
 	_loaded = not activities.is_empty() and not endings.is_empty()

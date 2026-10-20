@@ -18,7 +18,7 @@ const TALENT := Color("A876C4")    # 특기(보라)
 const MONEY := Color("5F9A58")
 const PREMIUM := Color("3FA6B8")
 
-const TOUCH_MIN := 60
+const TOUCH_MIN := 144  # 1080 기준 캔버스에서 360dp 폭으로 표시할 때 48dp
 
 # 번들 폰트 (main._apply_theme 에서 주입). 본문=Gothic A1 ExtraBold, 제목=Black Han Sans.
 static var body_font: Font = null
@@ -121,6 +121,7 @@ static func icon_button(kind: String, text: String, primary: bool = false,
 
 static func button(text: String, primary: bool = false) -> Button:
 	var b := Button.new()
+	b.mouse_filter = Control.MOUSE_FILTER_PASS
 	b.text = text
 	b.custom_minimum_size = Vector2(0, TOUCH_MIN)
 	if primary and title_font != null:
@@ -131,9 +132,10 @@ static func button(text: String, primary: bool = false) -> Button:
 	var bg := CORAL if primary else CARD
 	var fg := Color.WHITE if primary else TEXT
 	b.add_theme_color_override("font_color", fg)
-	b.add_theme_color_override("font_color_hover", fg)
-	b.add_theme_color_override("font_color_pressed", fg)
-	b.add_theme_color_override("font_color_focus", fg)
+	b.add_theme_color_override("font_hover_color", fg)
+	b.add_theme_color_override("font_pressed_color", fg)
+	b.add_theme_color_override("font_focus_color", fg)
+	b.add_theme_color_override("font_disabled_color", TEXT_SOFT)
 	b.add_theme_stylebox_override("normal", _btn_style(bg))
 	b.add_theme_stylebox_override("hover", _btn_style(bg.lightened(0.05)))
 	b.add_theme_stylebox_override("pressed", _btn_style(bg.darkened(0.08)))

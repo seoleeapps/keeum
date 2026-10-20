@@ -78,7 +78,7 @@ func _build_choices() -> void:
 		var b := UIKit.button(str(choice.get("label", "")))
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		b.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		b.custom_minimum_size = Vector2(0, 64)
+		b.custom_minimum_size = Vector2(0, UIKit.TOUCH_MIN)
 		b.pressed.connect(_on_choice.bind(i))
 		_choice_box.add_child(b)
 

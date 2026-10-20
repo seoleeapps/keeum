@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "level": "L3",
+  "baseline": null,
+  "changedFeatures": [
+    "core-loop",
+    "events-endings",
+    "cosmetics",
+    "save",
+    "settings",
+    "ads"
+  ],
+  "environments": [
+    "dev"
+  ],
+  "redesign": true,
+  "foundationRerun": true,
+  "floorOverrides": [],
+  "release": {
+    "markets": [
+      "google-play"
+    ],
+    "until": "public",
+    "rollout": 1
+  }
+}

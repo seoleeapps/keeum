@@ -116,3 +116,17 @@ Android 16 / 1200×2670(20:9) / Mali-G615 실기기에서 디버그 APK로 전 �
 1. 실기 스파이크 3건(`06-technical-production-plan.md`) — AdMob/Billing/StoreKit·Firebase 네이티브 연동, iOS export·서명.
 2. 리터치 사후 검수 — BGM·스팅어 청취 QA(`assets/ASSET-PROVENANCE.md`의 afplay 목록), 저사양·타 해상도 기기 2종 추가 확인.
 3. 플레이테스트 기반 밸런스 보정(유혹·전환기·페이싱)과 콘텐츠 재고 확장(활동·이벤트·엔딩, 엔딩 CG 증산 DEC-035).
+
+## Google Play 첫 출시 작업
+
+[승인 범위와 테스트 계획](docs/design/2026-10-21-google-play-launch/design.md), [결정 로그](docs/game-design/decision-log.md)가 현재 출시 범위다. 한국 Google Play, 광고와 로컬 저장만 사용한다. 활동 24종, 이벤트 48개, 엔딩 40개와 CG 12장이다.
+
+```sh
+npm run test:core
+npm run test:e2e
+bash scripts/run_e2e.sh --capture
+```
+
+검증 도구는 별도 user://에서 실행한다. `build/e2e/journey.json`과 렌더링 PNG를 만든다. 40엔딩의 합법적인 48턴 경로는 `tools/e2e/fixtures/ending-routes.json`이며 코어에서 재생한다. 실제 화면 입력 완주는 별도 여정이다.
+
+`main`과 PR에서는 검사만 실행한다. `Google Play Release`는 명시한 SemVer 태그에서 서명 AAB를 만들고 내부 테스트로 업로드한다. 프로덕션 키, 개발 검수 근거와 필수 네이티브 광고 검증이 준비되지 않으면 출시할 수 없다.

@@ -283,7 +283,7 @@ func _check_resume_unresolved_step() -> void:
 		str((step2.get("transition", {}) as Dictionary).get("gate", "?")))
 	_expect_str("전환기 선택 전 재개: 진급 전(단계 유지)", before_transition.child.stage, "infant")
 
-	before_transition.resolve_transition(before_transition.current_step["transition"], 0, false)
+	before_transition.resolve_transition(before_transition.current_step["transition"], 0)
 	_expect("전환기 해결 후: current_step 비움", 1 if before_transition.current_step.is_empty() else 0, 1)
 	var stage_once := before_transition.child.stage
 
@@ -333,7 +333,7 @@ func _play_full_round() -> void:
 					var ev: Dictionary = step["event"]
 					run.resolve_event(ev, _event_choice(ev))
 				"transition":
-					run.resolve_transition(step["transition"], 0, false)
+					run.resolve_transition(step["transition"], 0)
 				"application":
 					run.set_application("stable")
 					ending = run.determine_ending()

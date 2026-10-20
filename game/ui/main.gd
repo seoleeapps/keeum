@@ -11,7 +11,9 @@ var _current: UIScreen
 var _current_name := ""
 var _bg: TextureRect
 var _quit_layer: Control
-var _harness: UIHarness
+var _term_ad_pending := false
+var _emotional_queue := false
+var _harness: RefCounted
 
 const SCREENS := {
 	"onboarding": "res://game/ui/screens/onboarding_screen.gd",
@@ -36,6 +38,11 @@ const BGM_MAP := {"transition": "transition", "application": "transition", "endi
 func _ready() -> void:
 	if DisplayServer.get_name().to_lower() == "headless":
 		FX.force_reduced = true  # 헤드리스 하네스: 연출 즉시 경로(결정성 보장)
+	if OS.get_name() == "Android" and Engine.has_singleton("PoingGodotAdMob"):
+		var ads: RefCounted = load("res://game/adapter/ads/admob_android.gd").new()
+		AdGateway.configure(ads)
+		ads.start()
+	AdGateway.persist = GameController.save_game
 	_apply_theme()
 	_build_background()
 	_host = Control.new()
@@ -51,19 +58,24 @@ func _ready() -> void:
 	if win != null and not win.go_back_requested.is_connected(_on_back):
 		win.go_back_requested.connect(_on_back)
 	if "--ui-smoke" in OS.get_cmdline_args() or "--ui-smoke" in OS.get_cmdline_user_args():
-		_harness = UIHarness.new(self)
+		_harness = load("res://tools/ui_harness.gd").new(self)
 		_harness.call_deferred("run_smoke")
 		return
 	if "--ui-play" in OS.get_cmdline_user_args():
-		_harness = UIHarness.new(self)
+		_harness = load("res://tools/ui_harness.gd").new(self)
 		_harness.call_deferred("run_play")
 		return
+	if GameController.last_load_status != LocalSave.STATUS_FUTURE_VERSION and AdGateway.begin_session(GameController.profile):
+		if GameController.run != null:
+			GameController.save_game()
 	_route_initial()
 
 func _exit_tree() -> void:
 	# 정적 텍스처 캐시 해제("resources still in use at exit" 방지).
 	Art._cache.clear()
 	Art._anchors.clear()
+	UIKit.body_font = null
+	UIKit.title_font = null
 
 func _route_initial() -> void:
 	var gc := GameController
@@ -128,13 +140,22 @@ func _show_step(step: Dictionary) -> void:
 		"home":
 			GameController.save_game()
 			goto("home")
+			if _term_ad_pending and not _emotional_queue:
+				AdGateway.request_interstitial(GameController.profile, GameController.save_game)
+			_term_ad_pending = false
+			_emotional_queue = false
 		"event":
+			if str(step["event"].get("category", "")) == "bonding":
+				_emotional_queue = true
 			goto("event", step["event"])
 		"term":
+			_term_ad_pending = true
 			goto("term")
 		"transition":
+			_emotional_queue = true
 			goto("transition", step["transition"])
 		"application":
+			_term_ad_pending = false
 			goto("application")
 		_:
 			goto("home")
@@ -147,6 +168,7 @@ func _notification(what: int) -> void:
 var _back_frame := -1
 
 func _on_back() -> void:
+	if AdGateway.is_busy(): return
 	# 노티피케이션과 시그널이 함께 오는 경우 한 프레임에 한 번만 처리.
 	var frame := Engine.get_process_frames()
 	if frame == _back_frame:
@@ -222,11 +244,13 @@ func toast(text: String) -> void:
 
 func _build_toast() -> void:
 	var panel := UIKit.panel(UIKit.TEXT, 16)
+	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	panel.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
 	panel.position.y -= 140.0 + float(UIKit.safe_insets()["bottom"])
 	panel.z_index = 100
 	panel.visible = false
 	var l := UIKit.label("", 26, UIKit.CREAM, HORIZONTAL_ALIGNMENT_CENTER)
+	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	panel.add_child(l)
 	add_child(panel)
 	_toast_label = l

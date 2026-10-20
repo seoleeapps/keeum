@@ -27,9 +27,6 @@ func enter(_data: Variant = null) -> void:
 
 	body.add_child(_font_scale_row())
 
-	body.add_child(_toggle("이벤트 텍스트 낭독 (TTS)", false, func(on: bool) -> void:
-		router.toast("TTS는 실기기 빌드에서 지원돼요" if on else "")))
-
 	body.add_child(UIKit.spacer(8))
 	var notice := UIKit.panel(UIKit.CARD, 18)
 	var nv := UIKit.vbox(6)
@@ -40,6 +37,14 @@ func enter(_data: Variant = null) -> void:
 	body.add_child(notice)
 
 	body.add_child(UIKit.spacer(8))
+	var policy := UIKit.button("개인정보처리방침")
+	policy.pressed.connect(func() -> void:
+		OS.shell_open("https://www.seorilabs.com/apps/keeum/privacy/"))
+	body.add_child(policy)
+	if AdGateway.privacy_options_required():
+		var privacy := UIKit.button("광고 개인정보 선택")
+		privacy.pressed.connect(AdGateway.show_privacy_options)
+		body.add_child(privacy)
 	_reset_btn = UIKit.button("데이터 초기화")
 	_reset_btn.pressed.connect(_on_reset)
 	body.add_child(_reset_btn)

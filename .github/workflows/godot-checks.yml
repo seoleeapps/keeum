@@ -21,10 +21,12 @@ jobs:
     with:
       godot_version: "4.7.2"
       with_export_templates: false
-      runs_on: seorilabs-rpi-arm64
+      runs_on: ubuntu-latest
       project_dir: "."
+      e2e_report_path: build/e2e
       check_command: |
         node scripts/check_platform_sdk.mjs
         node --test scripts/tests/*.test.mjs
         bash scripts/check_fleet_source_contract.sh
         bash scripts/check_keeum.sh
+        npm run test:e2e
