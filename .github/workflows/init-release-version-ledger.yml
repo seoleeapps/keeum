@@ -1,0 +1,20 @@
+name: Initialize Release Version Ledger
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: '판정만 하고 번호 원장을 생성하지 않음'
+        type: boolean
+        default: true
+      play_readback_base64:
+        description: '중앙 read-google-play-version-codes.py의 실제 조회 결과 base64'
+        type: string
+        required: true
+permissions:
+  contents: write
+jobs:
+  initialize:
+    uses: seorilabs/.github/.github/workflows/init-release-version-ledger.yml@main
+    with:
+      dry_run: ${{ inputs.dry_run }}
+      play_readback_base64: ${{ inputs.play_readback_base64 }}

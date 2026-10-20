@@ -1,0 +1,25 @@
+name: Promote Google Play
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: '검증한 exact SemVer 태그'
+        required: true
+        type: string
+permissions:
+  contents: read
+  actions: read
+  id-token: write
+concurrency:
+  group: google-play-promotion
+  cancel-in-progress: false
+jobs:
+  promote:
+    uses: seorilabs/.github/.github/workflows/promote-google-play.yml@main
+    with:
+      release_tag: ${{ inputs.release_tag }}
+      package_name: com.seorilabs.keeum
+      from_track: internal
+      to_track: production
+      release_status: completed
+      rollout: '1'
