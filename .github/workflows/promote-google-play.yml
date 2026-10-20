@@ -22,4 +22,3 @@ jobs:
       from_track: internal
       to_track: production
       release_status: completed
-      rollout: '1'
