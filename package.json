@@ -4,6 +4,7 @@
   "scripts": {
     "test:core": "bash scripts/check_keeum.sh",
     "check:architecture": "node scripts/check_platform_sdk.mjs && node --test scripts/tests/*.test.mjs && bash scripts/check_fleet_source_contract.sh",
-    "check:release": "bash scripts/godot_quality_gate.sh --project . --isolate-user-data"
+    "check:release": "bash scripts/godot_quality_gate.sh --project . --isolate-user-data",
+    "test:e2e": "bash scripts/run_e2e.sh"
   }
 }

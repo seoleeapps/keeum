@@ -33,7 +33,7 @@ func enter(_data: Variant = null) -> void:
 		var b := UIKit.button("%s\n%s" % [GameController.application_label(app), OPTION_HINT.get(app, "")])
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		b.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		b.custom_minimum_size = Vector2(0, 90)
+		b.custom_minimum_size = Vector2(0, UIKit.TOUCH_MIN)
 		b.pressed.connect(_choose.bind(app))
 		body.add_child(b)
 	FX.stagger_children(body, 0.07)

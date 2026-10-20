@@ -1,0 +1,26 @@
+{
+  "out_dir": "play-store/assets",
+  "background": "#FBF3E7",
+  "items": [
+    {
+      "id": "play-icon",
+      "kind": "logo",
+      "path": "icon-512.png",
+      "source": "assets/art/app_icon.png",
+      "width": 512,
+      "height": 512,
+      "fit": "contain",
+      "background": "#FBF3E7"
+    },
+    {
+      "id": "feature",
+      "kind": "thumbnail",
+      "path": "feature-graphic-1024x500.png",
+      "source": "play-store/assets/feature-graphic-source.png",
+      "width": 1024,
+      "height": 500,
+      "fit": "contain",
+      "background": "#FBF3E7"
+    }
+  ]
+}

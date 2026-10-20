@@ -42,8 +42,15 @@ grep -qE '^application/export_project_only=true$' "$preset_file" \
 
 if git -C "$repo_root" ls-files \
   | grep -Ev '^build/\.gdignore$' \
-  | grep -Eq '(^|/)(build|raw)/|(^|/)\.godot/|\.import$|(^|/)qa_sheet\.png$'; then
-  fail "generated build, raw, QA, or import files must not be tracked"
+  | grep -Eq '(^|/)(build)/|(^|/)\.godot/|\.import$|(^|/)qa_sheet\.png$'; then
+  fail "generated build, QA, or import files must not be tracked"
 fi
+
+# 승인된 재생성 원본은 공개 저장소에 보존하되 게임에는 넣지 않는다.
+for raw_dir in assets/art/raw assets/audio/raw; do
+  grep '^exclude_filter=' "$preset_file" | while IFS= read -r filter; do
+    [[ "$filter" == *"$raw_dir/*"* ]] || fail "export must exclude $raw_dir"
+  done
+done
 
 echo "fleet source contract: OK"

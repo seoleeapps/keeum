@@ -12,6 +12,8 @@ var _b_cards: Dictionary = {}
 var _bonus_cards: Dictionary = {}
 var _bonus_container: VBoxContainer
 var _confirm_btn: Button
+var _ad_btn: Button
+var _repeat_btn: Button
 var _run: GameRun
 
 func enter(_data: Variant = null) -> void:
@@ -39,14 +41,15 @@ func enter(_data: Variant = null) -> void:
 	# 캡에 닿았으면 버튼도 "광고 시청 완료" 문구도 만들지 않는다(#34).
 	if AdGateway.can_open(GameController.profile):
 		body.add_child(UIKit.spacer(6))
-		var ad_btn := UIKit.icon_button("film", "보너스 슬롯 열기 (광고 시청)")
-		ad_btn.pressed.connect(_open_bonus)
-		body.add_child(ad_btn)
+		_ad_btn = UIKit.icon_button("film", "보너스 슬롯 열기 (광고 시청)")
+		_ad_btn.pressed.connect(_open_bonus)
+		body.add_child(_ad_btn)
 		_bonus_container = UIKit.vbox(10)
 		body.add_child(_bonus_container)
 
 	# 하단 고정 행동
 	var repeat := UIKit.button("지난 달 유지")
+	_repeat_btn = repeat
 	repeat.disabled = GameController.last_selection.is_empty()
 	repeat.pressed.connect(_repeat_last)
 	root.add_child(repeat)
@@ -78,7 +81,8 @@ func _build_slot(parent: Control, slot: String, store: Dictionary, cb: Callable)
 
 func _option_card(title: String, hint: String, _cost: int, _affordable: bool, act_id: String = "") -> Button:
 	var b := Button.new()
-	b.custom_minimum_size = Vector2(0, 92)
+	b.mouse_filter = Control.MOUSE_FILTER_PASS
+	b.custom_minimum_size = Vector2(0, UIKit.TOUCH_MIN)
 	b.alignment = HORIZONTAL_ALIGNMENT_LEFT
 	b.clip_text = false
 	b.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -87,6 +91,10 @@ func _option_card(title: String, hint: String, _cost: int, _affordable: bool, ac
 		b.add_theme_font_override("font", UIKit.body_font)
 	b.add_theme_font_size_override("font_size", UIKit.sz(26))
 	b.add_theme_color_override("font_color", UIKit.TEXT)
+	b.add_theme_color_override("font_hover_color", UIKit.TEXT)
+	b.add_theme_color_override("font_pressed_color", UIKit.TEXT)
+	b.add_theme_color_override("font_focus_color", UIKit.TEXT)
+	b.add_theme_color_override("font_disabled_color", UIKit.TEXT_SOFT)
 	# 활동 아이콘(생성 에셋 접합부): 있으면 좌측 배치 + 텍스트 들여쓰기
 	var iconed := false
 	if act_id != "":
@@ -165,11 +173,26 @@ func _on_pick_bonus(id: String) -> void:
 func _open_bonus() -> void:
 	if _bonus_open:
 		return
+	_ad_btn.disabled = true
+	_confirm_btn.disabled = true
+	_repeat_btn.disabled = true
+	if not AdGateway.request_rewarded(GameController.profile, "activity_bonus", _grant_bonus, _ad_finished):
+		_ad_finished(false)
+
+func _ad_finished(earned: bool) -> void:
+	GameController.save_game()
+	if not is_inside_tree(): return
+	_ad_btn.disabled = _bonus_open
+	_repeat_btn.disabled = GameController.last_selection.is_empty()
+	_refresh()
+	if not earned: router.toast("광고를 완료하지 못했어요. 기본 활동으로 계속할 수 있어요")
+
+func _grant_bonus() -> void:
+	if _bonus_open or not is_inside_tree(): return
 	_bonus_open = true
-	AdGateway.record_shown(GameController.profile)
 	GameController.save_game()
 	AudioBus.chime()
-	router.toast("광고 시청 완료 — 보너스 슬롯이 열렸어요")
+	router.toast("보너스 슬롯이 열렸어요")
 	_bonus_container.add_child(_section_title("보너스 슬롯 · 자유", UIKit.CORAL))
 	var rest := _option_card("— 사용 안 함 —", "", 0, true)
 	rest.pressed.connect(_on_pick_bonus.bind(""))
@@ -232,6 +255,8 @@ func _refresh_store(store: Dictionary, selected: String) -> void:
 
 func _confirm() -> void:
 	# 버튼 비활성화를 우회한 호출(연타·프로그램 호출)도 같은 판정으로 막는다.
+	if AdGateway.is_busy():
+		return
 	if not _run.household.can_afford(_selected_total_cost()):
 		router.toast("재력이 부족해요 — 활동 조합을 줄여 주세요")
 		return

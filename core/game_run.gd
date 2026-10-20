@@ -21,7 +21,6 @@ var semester_turn := 0       # 학기(4턴) 카운터
 var application := ""         # 원서 선택 (hanul/stable/art/free)
 var exposed := false         # 유혹 적발 여부
 var used_event_ids: Dictionary = {}   # once 이벤트 추적
-var ad_boost_used_gate: Dictionary = {}  # 전환기별 광고 부스트 사용
 
 var loaded_schema_version := SCHEMA_VERSION  # #45: load_from 이 실제로 채운다(이전엔 기록만 되고 읽는 코드가 없었다)
 var last_result: Dictionary = {}
@@ -70,7 +69,6 @@ func start_new(config: Dictionary) -> void:
 	application = ""
 	exposed = false
 	used_event_ids.clear()
-	ad_boost_used_gate.clear()
 	_steps.clear()
 	current_step = {}
 
@@ -434,25 +432,18 @@ func _extreme_subject(weakest: bool) -> String:
 	return target
 
 # ---------------------------------------------------------------- 전환기
-## 성공 확률(0~1). AC-007: 유대감 단조 증가, 광고 부스트 +20%p.
-func transition_success_chance(transition: Dictionary, with_ad_boost: bool) -> float:
+## 성공 확률(0~1). 유대감에 따라 증가하며 가족 대화에는 광고를 사용하지 않는다.
+func transition_success_chance(transition: Dictionary) -> float:
 	var difficulty := float(transition.get("difficulty", 0.0))
 	var base := 0.08 + float(household.bonding) * 0.0095 + float(child.emotion - 50) * 0.0012 - difficulty
-	if with_ad_boost:
-		base += 0.20
 	return clampf(base, 0.05, 0.95)
 
-func can_use_ad_boost(transition: Dictionary) -> bool:
-	return not ad_boost_used_gate.has(str(transition.get("gate", "")))
-
-func resolve_transition(transition: Dictionary, option_index: int, use_ad_boost: bool) -> Dictionary:
+func resolve_transition(transition: Dictionary, option_index: int) -> Dictionary:
 	var options: Array = transition.get("options", [])
 	var target := ""
 	if option_index >= 0 and option_index < options.size():
 		target = str(options[option_index].get("target", ""))
-	if use_ad_boost:
-		ad_boost_used_gate[str(transition.get("gate", ""))] = true
-	var chance := transition_success_chance(transition, use_ad_boost)
+	var chance := transition_success_chance(transition)
 	var success := rng.randf() < chance
 	if success and target != "":
 		child.temperament = target
@@ -502,18 +493,16 @@ func _ending_matches(ending: Dictionary, academic: int) -> bool:
 		return false
 	if req.has("applied") and str(req["applied"]) != application:
 		return false
-	if req.has("academic_min") and academic < int(req["academic_min"]):
+	if req.has("temperament") and str(req["temperament"]) != child.temperament:
 		return false
-	if req.has("emotion_min") and child.emotion < int(req["emotion_min"]):
-		return false
-	if req.has("stress_max") and child.stress > int(req["stress_max"]):
-		return false
-	if req.has("talent_min") and child.talent < int(req["talent_min"]):
-		return false
-	if req.has("bonding_min") and household.bonding < int(req["bonding_min"]):
-		return false
-	if req.has("temptation_max") and household.total_temptation_uses() > int(req["temptation_max"]):
-		return false
+	var stats := {"academic": academic, "emotion": child.emotion, "stress": child.stress,
+		"talent": child.talent, "bonding": household.bonding, "stamina": child.stamina,
+		"temptation": household.total_temptation_uses()}
+	for stat: String in stats:
+		if req.has(stat + "_min") and int(stats[stat]) < int(req[stat + "_min"]):
+			return false
+		if req.has(stat + "_max") and int(stats[stat]) > int(req[stat + "_max"]):
+			return false
 	return true
 
 ## 엔딩 확정 후 요약 딕셔너리. Profile 반영은 GameController가 수행.
@@ -545,7 +534,6 @@ func to_dict() -> Dictionary:
 		"application": application,
 		"exposed": exposed,
 		"used_event_ids": used_event_ids.duplicate(),
-		"ad_boost_used_gate": ad_boost_used_gate.duplicate(),
 		"rng_seed": int(rng.seed),
 		"rng_state": int(rng.state),
 		"steps": _steps.duplicate(true),
@@ -562,7 +550,6 @@ func load_from(d: Dictionary) -> void:
 	application = str(d.get("application", ""))
 	exposed = bool(d.get("exposed", false))
 	used_event_ids = d.get("used_event_ids", {})
-	ad_boost_used_gate = d.get("ad_boost_used_gate", {})
 	rng.seed = int(d.get("rng_seed", 0))
 	rng.state = int(d.get("rng_state", rng.state))
 	_steps = d.get("steps", [])

@@ -158,12 +158,30 @@ run_godot() {
   fi
 }
 
+# 캐시는 동일한 소스 집합에서만 재사용한다. 폰트 remap과 fontdata는 한 쌍이다.
+source_key="$(python3 - "$repo_root" <<'PYKEY'
+import hashlib, sys
+from pathlib import Path
+root = Path(sys.argv[1]); digest = hashlib.sha256()
+for folder in ['core', 'game', 'tools', 'addons', 'data']:
+    for path in sorted((root / folder).rglob('*')):
+        if path.is_file() and path.suffix in ['.gd', '.tscn', '.json', '.ttf']:
+            digest.update(str(path.relative_to(root)).encode()); digest.update(path.read_bytes())
+digest.update((root / 'project.godot').read_bytes())
+print(digest.hexdigest())
+PYKEY
+)"
 # 새 macOS 프로젝트 이름에는 Godot의 전역 클래스 캐시가 없다. 같은 상위 검증
 # 실행에서는 최초 임포트 결과를 복사해 쓰되, 각 Godot 프로세스의 .godot 디렉터리와
 # user://는 계속 분리한다. 픽스처는 준비가 끝난 뒤에 만들므로 임포트가 건드릴 수 없다.
 if [[ "$(uname -s)" == "Darwin" && -n "$isolation_cache_dir" \
-    && -f "$isolation_cache_dir/.godot/global_script_class_cache.cfg" ]]; then
+    && -f "$isolation_cache_dir/.godot/global_script_class_cache.cfg" \
+    && -f "$isolation_cache_dir/source-key" \
+    && "$(cat "$isolation_cache_dir/source-key")" == "$source_key" ]]; then
   cp -R "$isolation_cache_dir/.godot" "$project_root/.godot"
+  if [[ -d "$isolation_cache_dir/font-remaps" ]]; then
+    cp "$isolation_cache_dir/font-remaps/"*.import "$project_root/game/ui/fonts/"
+  fi
 elif [[ ! -f "$project_root/.godot/global_script_class_cache.cfg" ]]; then
   set +e
   run_godot "$godot_bin" --headless --path "$project_root" --import --quit \
@@ -177,7 +195,11 @@ elif [[ ! -f "$project_root/.godot/global_script_class_cache.cfg" ]]; then
   fi
   if [[ "$(uname -s)" == "Darwin" && -n "$isolation_cache_dir" ]]; then
     mkdir -p "$isolation_cache_dir"
-    cp -R "$project_root/.godot" "$isolation_cache_dir/.godot"
+    mkdir -p "$isolation_cache_dir/.godot"
+    cp -R "$project_root/.godot/." "$isolation_cache_dir/.godot/"
+    printf '%s\n' "$source_key" > "$isolation_cache_dir/source-key"
+    mkdir -p "$isolation_cache_dir/font-remaps"
+    cp "$project_root/game/ui/fonts/"*.import "$isolation_cache_dir/font-remaps/"
   fi
 fi
 

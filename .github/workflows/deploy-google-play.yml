@@ -1,0 +1,34 @@
+name: Google Play Release
+on:
+  push:
+    tags: ['v*.*.*']
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: '출시할 exact SemVer 태그'
+        required: true
+        type: string
+permissions:
+  contents: read
+  actions: read
+  id-token: write
+concurrency:
+  group: google-play-release
+  cancel-in-progress: false
+jobs:
+  release:
+    uses: seorilabs/.github/.github/workflows/godot-deploy-google-play.yml@main
+    with:
+      release_tag: ${{ inputs.release_tag || github.ref_name }}
+      package_name: com.seorilabs.keeum
+      godot_version: '4.7.2'
+      scripts_dir: scripts
+      aab_name: keeum
+      track: internal
+      release_status: completed
+      prepare_project_script: scripts/prepare_google_play.sh
+      post_export_validation_script: scripts/validate_android_aab.sh
+    secrets:
+      GOOGLE_PLAY_UPLOAD_KEYSTORE_BASE64: ${{ secrets.GOOGLE_PLAY_UPLOAD_KEYSTORE_BASE64 }}
+      GOOGLE_PLAY_UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.GOOGLE_PLAY_UPLOAD_KEYSTORE_PASSWORD }}
+      GOOGLE_PLAY_UPLOAD_KEY_PASSWORD: ${{ secrets.GOOGLE_PLAY_UPLOAD_KEY_PASSWORD }}

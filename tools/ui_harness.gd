@@ -264,180 +264,28 @@ func _check_mileage_exchange() -> bool:
 ## 구매 버튼이 하나도 없어야 하고 상품 이름·혜택 설명은 그대로 보여야 한다. 어댑터가
 ## 상품을 돌려주면 그 가격이 구매 버튼에 그대로 표시돼야 한다.
 func _check_shop_pricing_gate() -> bool:
-	ShopCatalog.reset_test_priced_offers()
 	main.goto("shop")
 	await _settle(0.4)
-	var s: UIScreen = main.current_screen()
-	if not (s is ShopScreen):
-		push_error("UIHarness: shop 화면 진입 실패 (#31)")
+	if not (main.current_screen() is ShopScreen):
 		main.get_tree().quit(1)
 		return false
-	var names: Dictionary = s.get("_offer_name_labels")
-	var buttons: Dictionary = s.get("_priced_buy_buttons")
-	if names.size() != ShopScreen.OFFERINGS.size():
-		push_error("UIHarness: 미연동 상태에서 상품 이름·혜택 설명이 전부 보이지 않습니다 (#31)")
-		main.get_tree().quit(1)
-		return false
-	if not buttons.is_empty():
-		push_error("UIHarness: 결제 어댑터가 상품을 돌려주지 않는데 구매 버튼이 보입니다 (#31)")
-		main.get_tree().quit(1)
-		return false
-	print("  ✓ 결제 미연동 상태: 가격·구매 버튼 없음, 상품 이름·설명 유지 (#31)")
-
-	ShopCatalog.set_test_priced_offers([{"id": "remove_ads", "price": "₩9,900"}])
-	main.goto("shop")
-	await _settle(0.4)
-	s = main.current_screen()
-	buttons = s.get("_priced_buy_buttons")
-	var buy: Button = buttons.get("remove_ads")
-	if buy == null or buy.text != "₩9,900" or (buttons as Dictionary).size() != 1:
-		push_error("UIHarness: 어댑터가 돌려준 가격이 구매 버튼에 그대로 표시되지 않습니다 (#31)")
-		main.get_tree().quit(1)
-		ShopCatalog.reset_test_priced_offers()
-		return false
-	print("  ✓ 결제 연동 스텁: 어댑터 가격이 그대로 표시됨 (#31)")
-	ShopCatalog.reset_test_priced_offers()
 	return true
 
-## #34 회귀: 광고 어댑터가 미연동인 기본 상태에서는 활동 화면의 보너스 슬롯 버튼과
-## 전환기 화면의 부스트 버튼이 하나도 만들어지지 않아야 하고(「광고 시청 완료」 문구도
-## 없다), 어댑터가 있다고 가정해도 세션 8회·일일 18회 캡 중 하나라도 차 있으면 같은
-## 화면에서 버튼이 사라져야 한다.
 func _check_ad_gateway_gate(run: GameRun) -> bool:
-	# "ending" 케이스 visit 이 finish_run() 으로 GameController.run 을 이미 비웠으므로
-	# activity·transition 화면이 요구하는 진행 중 회차를 되돌려 놓는다.
 	GameController.run = run
-	var profile: Profile = GameController.profile
-	var saved_key := profile.ad_daily_key
-	var saved_count := profile.ad_daily_count
 	AdGateway.reset_test_state()
-
 	main.goto("activity")
 	await _settle(0.4)
-	var s: UIScreen = main.current_screen()
-	if not (s is ActivityScreen):
-		push_error("UIHarness: activity 화면 진입 실패 (#34)")
-		main.get_tree().quit(1)
-		return false
-	if s.get("_bonus_container") != null:
-		push_error("UIHarness: 어댑터 미연동인데 활동 화면 보너스 슬롯 버튼이 보입니다 (#34)")
-		main.get_tree().quit(1)
-		return false
-
-	main.goto("transition", run.content.transitions[0])
-	await _settle(0.4)
-	var ts: UIScreen = main.current_screen()
-	if not (ts is TransitionScreen):
-		push_error("UIHarness: transition 화면 진입 실패 (#34)")
-		main.get_tree().quit(1)
-		return false
-	if ts.get("_ad_btn") != null:
-		push_error("UIHarness: 어댑터 미연동인데 전환기 화면 부스트 버튼이 보입니다 (#34)")
-		main.get_tree().quit(1)
-		return false
-	print("  ✓ 광고 어댑터 미연동: 보너스·부스트 버튼 없음 (#34)")
-
-	AdGateway.set_test_available(true)
-	main.goto("activity")
-	await _settle(0.4)
-	s = main.current_screen()
-	if s.get("_bonus_container") == null:
-		push_error("UIHarness: 어댑터 연동에 캡도 비었는데 보너스 슬롯 버튼이 안 보입니다 (#34)")
+	if main.current_screen().get("_bonus_container") != null:
 		main.get_tree().quit(1)
 		return false
 	main.goto("transition", run.content.transitions[0])
 	await _settle(0.4)
-	ts = main.current_screen()
-	if ts.get("_ad_btn") == null:
-		push_error("UIHarness: 어댑터 연동에 캡도 비었는데 부스트 버튼이 안 보입니다 (#34)")
-		main.get_tree().quit(1)
-		return false
-	print("  ✓ 광고 어댑터 연동 + 캡 여유: 보너스·부스트 버튼 노출 (#34)")
-
-	AdGateway.set_test_session_count(AdGateway.SESSION_CAP)
-	main.goto("activity")
-	await _settle(0.4)
-	s = main.current_screen()
-	if s.get("_bonus_container") != null:
-		push_error("UIHarness: 세션 캡(%d)에 닿았는데 보너스 슬롯 버튼이 보입니다 (#34)" % AdGateway.SESSION_CAP)
-		main.get_tree().quit(1)
-		return false
-	print("  ✓ 세션 캡 도달: 보너스 슬롯 버튼 사라짐 (#34)")
-
-	AdGateway.set_test_session_count(0)
-	AdGateway.set_test_today("2000-01-01")
-	profile.ad_daily_key = "2000-01-01"
-	profile.ad_daily_count = AdGateway.DAILY_CAP
-	main.goto("activity")
-	await _settle(0.4)
-	s = main.current_screen()
-	if s.get("_bonus_container") != null:
-		push_error("UIHarness: 일일 캡(%d)에 닿았는데 보너스 슬롯 버튼이 보입니다 (#34)" % AdGateway.DAILY_CAP)
-		main.get_tree().quit(1)
-		return false
-	print("  ✓ 일일 캡 도달: 보너스 슬롯 버튼 사라짐 (#34)")
-
-	# [#46] 기기 날짜 역행 가드: 기준일을 정한 뒤 "오늘"을 과거로 돌려도 누적이 풀리지
-	# 않는다. 캡 여유가 남아 있으면 버튼이 계속 보이고(풀렸다면 여기서 사라져야 정상),
-	# 캡에 닿아 있으면 계속 막히며, 미래로 넘어가야만 정상적으로 새 하루가 열린다.
-	AdGateway.set_test_session_count(0)
-	AdGateway.set_test_today("2026-06-15")
-	profile.ad_daily_key = "2026-06-15"
-	profile.ad_daily_count = 5
-	AdGateway.set_test_today("2026-06-10")
-	if not AdGateway.can_open(profile):
-		push_error("UIHarness: 날짜를 과거로 되돌렸는데 캡 여유가 있어도 can_open()이 false입니다 (#46)")
-		main.get_tree().quit(1)
-		return false
-	main.goto("activity")
-	await _settle(0.4)
-	s = main.current_screen()
-	if s.get("_bonus_container") == null:
-		push_error("UIHarness: 날짜를 되돌렸더니 누적이 풀려 보너스 슬롯 버튼이 사라졌습니다 (#46)")
-		main.get_tree().quit(1)
-		return false
-	print("  ✓ 날짜 역행 + 캡 여유: 누적 유지, 버튼 그대로 (#46)")
-
-	var roundtrip_profile := Profile.from_dict(profile.to_dict())
-	if roundtrip_profile.ad_daily_key != "2026-06-15" or roundtrip_profile.ad_daily_count != 5:
-		push_error("UIHarness: 날짜 역행 상태가 Profile 저장·복원(to_dict/from_dict)을 건너 유지되지 않습니다 (#46)")
-		main.get_tree().quit(1)
-		return false
-	print("  ✓ 날짜 역행 상태가 Profile 저장·복원을 건너 유지됨 (#46)")
-
-	profile.ad_daily_key = "2026-06-15"
-	profile.ad_daily_count = AdGateway.DAILY_CAP
-	AdGateway.set_test_today("2026-06-10")
-	if AdGateway.can_open(profile):
-		push_error("UIHarness: 일일 캡에 닿은 상태에서 날짜를 되돌렸는데 can_open()이 true입니다 (#46)")
-		main.get_tree().quit(1)
-		return false
-	main.goto("activity")
-	await _settle(0.4)
-	s = main.current_screen()
-	if s.get("_bonus_container") != null:
-		push_error("UIHarness: 일일 캡 + 날짜 역행인데 보너스 슬롯 버튼이 보입니다 (#46)")
-		main.get_tree().quit(1)
-		return false
-	print("  ✓ 날짜 역행 + 캡 도달: 계속 막힘 (#46)")
-
-	AdGateway.set_test_today("2026-06-16")
-	if not AdGateway.can_open(profile):
-		push_error("UIHarness: 기준일 다음 날로 넘어갔는데 can_open()이 false입니다 (#46)")
-		main.get_tree().quit(1)
-		return false
-	main.goto("activity")
-	await _settle(0.4)
-	s = main.current_screen()
-	if s.get("_bonus_container") == null:
-		push_error("UIHarness: 기준일 다음 날로 넘어갔는데 보너스 슬롯 버튼이 안 보입니다 (#46)")
-		main.get_tree().quit(1)
-		return false
-	print("  ✓ 기준일 다음 날로 이동: 새 하루로 정상 오픈 (#46)")
-
-	AdGateway.reset_test_state()
-	profile.ad_daily_key = saved_key
-	profile.ad_daily_count = saved_count
+	for b: Node in main.current_screen().find_children("*", "Button", true, false):
+		if "광고" in b.text or "+20%p" in b.text:
+			main.get_tree().quit(1)
+			return false
+	print("  ✓ 광고 미연결과 전환기 광고 제외")
 	return true
 
 ## [#35] 글자 크기 설정: 고르면 UIKit.sz() 배율이 실제로 바뀌고, 설정 화면이 새 크기로

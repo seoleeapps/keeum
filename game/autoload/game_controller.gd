@@ -144,9 +144,7 @@ func reset_all() -> void:
 
 # ---------------------------------------------------------------- 분석(스텁)
 func track(event_name: String, params: Dictionary = {}) -> void:
-	# 실제 GA4 는 네이티브 플러그인 어댑터로 교체(06 문서). 현재는 로그 스텁.
-	if OS.is_debug_build():
-		print("[analytics] %s %s" % [event_name, JSON.stringify(params)])
+	pass  # 첫 출시는 이용 지표를 수집하거나 전송하지 않는다.
 
 # ---------------------------------------------------------------- 편의
 func application_label(app: String) -> String:
