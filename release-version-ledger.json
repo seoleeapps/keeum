@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "release": {
+    "lastTag": null,
+    "lastSourceSha": null,
+    "marketingVersion": null
+  },
+  "android": {
+    "authority": "github-ledger",
+    "lastVersionCode": 0,
+    "legacyFallbackSealed": false
+  },
+  "ios": {
+    "authority": "xcode-cloud",
+    "lastObservedBuildNumber": null,
+    "lastObservedTag": null
+  },
+  "provenance": {
+    "initializedAt": "2026-10-20T17:53:51Z",
+    "initializedBy": "release-version-ledger-init-v1",
+    "initializedFromWorkflowSha": "e7f433c071cf5d3ad4434c02ddf6a12164749489",
+    "authorityRevision": "26721fdbf3cdde6da01b8af05f7d867bfe71a40e7180f1bc1f6c903df4aa9422",
+    "baseline": {
+      "androidVersionCode": 0,
+      "rule": "max-of-verified-sources",
+      "sources": [
+        {
+          "kind": "google-play-bundles-list",
+          "androidVersionCode": 0,
+          "packageName": "com.seorilabs.keeum",
+          "observedAt": "2026-10-20T17:52:09Z",
+          "evidenceDigest": "sha256:41392e688844500d0c811eb86b3c8351e43179b19434df9bdd1bf56855fa2ebf"
+        }
+      ]
+    }
+  }
+}
