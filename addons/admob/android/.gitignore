@@ -1,2 +1,10 @@
 # Remove /bin folder line if you want to commit
 /bin
+
+# keeum Android 릴리스에 고정한 core, ads만 추적한다.
+!bin/
+bin/*
+!bin/package.gd
+!bin/package.gd.uid
+!bin/ads/
+!bin/ads/**
