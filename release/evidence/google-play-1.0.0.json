@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "recordedAt": "2026-10-21T00:48:25.305984+00:00",
+  "recordedAt": "2026-10-21T09:39:28.305265+00:00",
   "repository": "seoleeapps/keeum",
   "packageName": "com.seorilabs.keeum",
   "candidate": {
@@ -65,7 +65,10 @@
     "uploadDigestMatched": true,
     "reviewSubmitted": false,
     "publicLive": false,
-    "appSigningCertificateSha256": "AE:38:4C:56:03:F5:3E:B8:CC:69:D2:C0:04:95:20:6F:7E:C0:FE:BE:24:65:8A:B2:AE:2A:44:7E:DD:DF:12:9F"
+    "appSigningCertificateSha256": "AE:38:4C:56:03:F5:3E:B8:CC:69:D2:C0:04:95:20:6F:7E:C0:FE:BE:24:65:8A:B2:AE:2A:44:7E:DD:DF:12:9F",
+    "checkedAt": "2026-10-21T09:30:31.726599+00:00",
+    "managedPublishingEnabled": false,
+    "productionTrackHasRelease": false
   },
   "policy": {
     "completedDeclarations": 10,
@@ -80,21 +83,60 @@
   },
   "nativeGate": {
     "sourceSha": "0823aaeeb104851b36fc025a74df50bc4b5b7a18",
-    "device": "Seeker",
     "packageName": "com.seorilabs.keeum",
-    "existingPackage": {
-      "installed": false,
-      "debuggable": true,
-      "versionCode": 1,
-      "versionName": "not-reported",
-      "certificateSha256Comparable": false,
-      "retainedDataContentsRead": false
+    "device": "Seeker",
+    "retainedDataRemovalAuthorized": true,
+    "retainedDataRemoved": true,
+    "installOrLaunchPerformed": true,
+    "installedVia": "adb; Play-generated signed APK, not Play Store installation",
+    "versionName": "1.0.0",
+    "versionCode": 1,
+    "apkSha256": "dff8b9e734d80c82fe67112c176056d91ca10bb359eadcd91ff81524ce829053",
+    "configurationFingerprint": "e7b3bd5e6713a049addf519eaf43ff05ae7f05630b40b80cd1f7a1ff355b634c",
+    "nativeSdkStatus": "blocked-before-sdk",
+    "nativeUmpGmaPassedCount": 0,
+    "blockers": [
+      {
+        "id": "play-installer-protection",
+        "observation": "Play 생성 APK의 LicenseClient가 adb 설치 출처를 거절하고 앱 프로세스가 종료됨",
+        "exactLog": "Local install check failed due to wrong installer."
+      },
+      {
+        "id": "play-own-package-detail-offline",
+        "observation": "같은 패키지의 Play 상세 링크도 오프라인 상태 안내로 막혀 실제 Play 설치를 계속하지 못함"
+      }
+    ],
+    "timing": {
+      "previousSegmentSeconds": 118.6979,
+      "supplementarySegmentSeconds": 373.4327475829923,
+      "cumulativeDeviceSeconds": 492.1306475829923,
+      "overallApprovedSeconds": 1500,
+      "remainingOverallSeconds": 1007.8693524170077,
+      "publicSmokeReservedSeconds": 300,
+      "remainingExcludingPublicReservationSeconds": 707.8693524170077,
+      "supplementary18MinuteUnusedSeconds": 706.5672524170077
     },
-    "installOrLaunchPerformed": false,
-    "nativeSdkStatus": "not-run",
-    "elapsedBeforeStopSeconds": 118.69786983300583,
-    "additionalApproval": "requested-for-this-package-retained-data-removal-only",
-    "reportedAt": "2026-10-21T00:47:05.807025+00:00"
+    "publicSummary": "android-native-1.0.0-blocked.json",
+    "previousStop": {
+      "sourceSha": "0823aaeeb104851b36fc025a74df50bc4b5b7a18",
+      "device": "Seeker",
+      "packageName": "com.seorilabs.keeum",
+      "existingPackage": {
+        "installed": false,
+        "debuggable": true,
+        "versionCode": 1,
+        "versionName": "not-reported",
+        "certificateSha256Comparable": false,
+        "retainedDataContentsRead": false
+      },
+      "installOrLaunchPerformed": false,
+      "nativeSdkStatus": "not-run",
+      "elapsedBeforeStopSeconds": 118.69786983300583,
+      "additionalApproval": "requested-for-this-package-retained-data-removal-only",
+      "reportedAt": "2026-10-21T00:47:05.807025+00:00"
+    },
+    "nextAction": "추가 승인 전 기기 조작 금지. 기존 Wi-Fi 연결 복구 또는 사용자의 직접 복구 후 같은 후보 검수 재개 선택 대기.",
+    "reportedAt": "2026-10-21T09:37:55.120363Z"
   },
   "admob": {
     "appId": "ca-app-pub-9932778305312246~7499948507",
@@ -102,7 +144,9 @@
     "interstitialUnit": "ca-app-pub-9932778305312246/6386352398",
     "umpMessage": "published",
     "playStoreLinked": false,
-    "servingReady": false
+    "servingReady": false,
+    "checkedAt": "2026-10-21T09:34:04.165295+00:00",
+    "storeSearchResult": "exact package no result; no connection saved"
   },
   "archives": {
     "developmentQa": {
@@ -113,7 +157,20 @@
       "name": "signing-internal-1.0.0-evidence.zip",
       "release": "https://github.com/seoleeapps/keeum/releases/tag/v1.0.0",
       "sha256": "8dcf008bbdc1da4d20ba45d4277773e82af67f1b9169471b5bc7967f5ddc0c88"
+    },
+    "nativeBlocked": {
+      "apiUrl": "https://api.github.com/repos/seoleeapps/keeum/releases/assets/662023730",
+      "name": "native-sdk-blocked-1.0.0-evidence.zip",
+      "sha256": "7343804308a78d207f046b112260222770099141c15c11eb3af23698cfc3ed79",
+      "rawDeviceEvidencePublished": false
     }
   },
-  "retention": "unmeasured"
+  "retention": "unmeasured",
+  "centralBeforeRelease": {
+    "checkedAt": "2026-10-21T09:37:43.265266+00:00",
+    "ok": false,
+    "errors": [
+      "TEST_LEVEL_BELOW_FLOOR platform-first ads android"
+    ]
+  }
 }

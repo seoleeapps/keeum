@@ -1,0 +1,52 @@
+{
+  "sourceSha": "0823aaeeb104851b36fc025a74df50bc4b5b7a18",
+  "package": "com.seorilabs.keeum",
+  "versionName": "1.0.0",
+  "versionCode": 1,
+  "device": "승인된 Android 기기 한 대",
+  "startedAt": "2026-10-21T09:31:41.694063Z",
+  "completedAt": "2026-10-21T09:37:55.120363Z",
+  "status": "blocked",
+  "verified": [
+    "승인된 해당 패키지 잔여 데이터와 서명 기록 삭제",
+    "정확한 Play 생성 서명 APK 설치",
+    "대상 패키지의 1.0.0, code 1, targetSdk 36, DEBUGGABLE 없음",
+    "Poing AdMob 및 UMP 플러그인 등록 로그"
+  ],
+  "notVerified": [
+    "실제 UMP 응답과 동의 창",
+    "GMA SDK 초기화 및 광고 요청과 로드",
+    "Test Ad 표시",
+    "보상형 취소와 완료 후 60젬 한 번 지급",
+    "60초 보상형 간격",
+    "전면 광고 조건과 180초 제한",
+    "광고 종료 후 게임 복귀"
+  ],
+  "nativeUmpGmaPassedCount": 0,
+  "blockers": [
+    {
+      "id": "play-installer-protection",
+      "observation": "Play 생성 APK의 LicenseClient가 adb 설치 출처를 거절하고 앱 프로세스가 종료됨",
+      "exactLog": "Local install check failed due to wrong installer."
+    },
+    {
+      "id": "play-own-package-detail-offline",
+      "observation": "같은 패키지의 Play 상세 링크도 오프라인 상태 안내로 막혀 실제 Play 설치를 계속하지 못함"
+    }
+  ],
+  "timing": {
+    "previousSegmentSeconds": 118.6979,
+    "supplementarySegmentSeconds": 373.4327475829923,
+    "cumulativeDeviceSeconds": 492.1306475829923,
+    "overallApprovedSeconds": 1500,
+    "remainingOverallSeconds": 1007.8693524170077,
+    "publicSmokeReservedSeconds": 300,
+    "remainingExcludingPublicReservationSeconds": 707.8693524170077,
+    "supplementary18MinuteUnusedSeconds": 706.5672524170077
+  },
+  "publicSmokeStarted": false,
+  "noInstallerSpoofing": true,
+  "noAccountNetworkOrOsSettingChanges": true,
+  "noFurtherAdbWithoutNewApproval": true,
+  "privacy": "원시 기기 식별자와 외부 앱 화면은 이 공개용 요약에 포함하지 않음"
+}
