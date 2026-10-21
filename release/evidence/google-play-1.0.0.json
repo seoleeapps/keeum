@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-21T00:48:25.305984+00:00",
+  "repository": "seoleeapps/keeum",
+  "packageName": "com.seorilabs.keeum",
+  "candidate": {
+    "tag": "v1.0.0",
+    "sourceSha": "0823aaeeb104851b36fc025a74df50bc4b5b7a18",
+    "versionName": "1.0.0",
+    "versionCode": 1,
+    "countries": [
+      "KR"
+    ],
+    "rollout": "full"
+  },
+  "development": {
+    "level": "L3",
+    "ciRun": "https://github.com/seoleeapps/keeum/actions/runs/39469353484",
+    "independentUiRounds": 3,
+    "screenshots": 33,
+    "inputSteps": 900,
+    "endingCorePaths": 40,
+    "uiEndingRoutes": 1,
+    "nativeSdkRun": false
+  },
+  "artifact": {
+    "sourceSha": "0823aaeeb104851b36fc025a74df50bc4b5b7a18",
+    "buildRun": "https://github.com/seoleeapps/keeum/actions/runs/39521374449",
+    "aabSha256": "8564479ee833a29e4c0c746427aeb157133c5ec474c0d09403eda17d0b7d9eb6",
+    "bytes": 93229973,
+    "uploadCertificateSha256": "77:F9:26:3D:24:F7:F9:A2:BD:05:93:4C:6F:BF:73:4C:0E:D3:A0:95:6A:82:D4:3F:07:6D:20:C3:A7:AF:1E:16",
+    "signatureVerification": "passed-self-signed-app-upload-certificate",
+    "rawArtAudioAndE2EExcluded": true,
+    "elf16KbAlignedLibraries": 2,
+    "checkedAt": "2026-10-21T00:32:19.088615+00:00"
+  },
+  "manifest": {
+    "packageName": "com.seorilabs.keeum",
+    "versionName": "1.0.0",
+    "versionCode": 1,
+    "minSdk": "24",
+    "targetSdk": 36,
+    "debuggable": false,
+    "admobAppId": "ca-app-pub-9932778305312246~7499948507",
+    "permissions": [
+      "android.permission.ACCESS_NETWORK_STATE",
+      "android.permission.INTERNET",
+      "android.permission.VIBRATE",
+      "android.permission.WAKE_LOCK",
+      "android.permission.AD_ID",
+      "android.permission.READ_BASIC_PHONE_STATE",
+      "com.google.android.gms.permission.AD_ID",
+      "android.permission.FOREGROUND_SERVICE",
+      "com.seorilabs.keeum.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+    ],
+    "firebaseMetadata": false
+  },
+  "googlePlay": {
+    "track": "internal",
+    "releaseName": "1.0.0 (1)",
+    "releaseStatus": "completed",
+    "active": true,
+    "testerGroup": "내부테스트 그룹",
+    "testerCount": 2,
+    "uploadDigestMatched": true,
+    "reviewSubmitted": false,
+    "publicLive": false,
+    "appSigningCertificateSha256": "AE:38:4C:56:03:F5:3E:B8:CC:69:D2:C0:04:95:20:6F:7E:C0:FE:BE:24:65:8A:B2:AE:2A:44:7E:DD:DF:12:9F"
+  },
+  "policy": {
+    "completedDeclarations": 10,
+    "attentionRequired": 0,
+    "krIarcRating": "전체이용가",
+    "targetAudience": "18+",
+    "adIdPurposes": [
+      "analytics",
+      "advertising-or-marketing",
+      "fraud-prevention-security-compliance"
+    ]
+  },
+  "nativeGate": {
+    "sourceSha": "0823aaeeb104851b36fc025a74df50bc4b5b7a18",
+    "device": "Seeker",
+    "packageName": "com.seorilabs.keeum",
+    "existingPackage": {
+      "installed": false,
+      "debuggable": true,
+      "versionCode": 1,
+      "versionName": "not-reported",
+      "certificateSha256Comparable": false,
+      "retainedDataContentsRead": false
+    },
+    "installOrLaunchPerformed": false,
+    "nativeSdkStatus": "not-run",
+    "elapsedBeforeStopSeconds": 118.69786983300583,
+    "additionalApproval": "requested-for-this-package-retained-data-removal-only",
+    "reportedAt": "2026-10-21T00:47:05.807025+00:00"
+  },
+  "admob": {
+    "appId": "ca-app-pub-9932778305312246~7499948507",
+    "rewardedUnit": "ca-app-pub-9932778305312246/1213916766",
+    "interstitialUnit": "ca-app-pub-9932778305312246/6386352398",
+    "umpMessage": "published",
+    "playStoreLinked": false,
+    "servingReady": false
+  },
+  "archives": {
+    "developmentQa": {
+      "apiUrl": "https://api.github.com/repos/seoleeapps/keeum/releases/assets/660068790",
+      "sha256": "ea48958edc29b7874e67270bd03856b4c5d9d4d3886dcefba270c8e3bc99eadf"
+    },
+    "signingInternal": {
+      "name": "signing-internal-1.0.0-evidence.zip",
+      "release": "https://github.com/seoleeapps/keeum/releases/tag/v1.0.0",
+      "sha256": "8dcf008bbdc1da4d20ba45d4277773e82af67f1b9169471b5bc7967f5ddc0c88"
+    }
+  },
+  "retention": "unmeasured"
+}
