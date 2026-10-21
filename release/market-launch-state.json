@@ -1,0 +1,193 @@
+{
+  "schemaVersion": 1,
+  "app": {
+    "name": "keeum",
+    "repo": "seoleeapps/keeum",
+    "sourceRevision": "0823aaeeb104851b36fc025a74df50bc4b5b7a18"
+  },
+  "release": {
+    "version": "1.0.0",
+    "tag": "v1.0.0",
+    "objective": "public_live",
+    "countries": [
+      "KR"
+    ],
+    "rolloutMode": "최초 한국 전체 공개, production completed, staged rollout 없음"
+  },
+  "deploymentApproval": {
+    "status": "approved",
+    "markets": [
+      "google_play"
+    ],
+    "objective": "public_live",
+    "approvedAt": "2026-10-21",
+    "evidence": [
+      "2026-10-21 사용자 전달 계획: Seolee Apps 한국 Google Play 공개, 최초 한국 대상 전체 배포, 최종 한국 스토어 조회와 승인 최소 실행까지. 날짜만 기록하며 정확한 승인 시각을 추정하지 않음.",
+      "docs/design/2026-10-21-google-play-launch/design.md 및 test-plan.json, 승인 커밋90b5efffe6643d0b94c2d3abaecf0d465b552fb4"
+    ]
+  },
+  "commonGates": {
+    "candidate": {
+      "status": "pass",
+      "evidence": [
+        "https://github.com/seoleeapps/keeum/actions/runs/39521283892",
+        "build/release/v1.0.0-tag-receipt.txt: v1.0.0,source0823aae,android-code1",
+        "https://github.com/seoleeapps/keeum/releases/tag/v1.0.0"
+      ],
+      "checkedAt": "2026-10-21T00:28:30.920282+00:00",
+      "blocker": null
+    },
+    "quality": {
+      "status": "pass",
+      "evidence": [
+        "https://github.com/seoleeapps/keeum/actions/runs/39469353484",
+        "https://api.github.com/repos/seoleeapps/keeum/releases/assets/660068790",
+        "build/release/before-build-gate.json: 중앙 L3 before-build 통과. build/qa/qa-summary.md: 독립 core/UI3회 통과. 실제 SDK는 별도 미실행."
+      ],
+      "checkedAt": "2026-10-20T18:04:16.820157+00:00",
+      "blocker": null
+    },
+    "production_dependencies": {
+      "status": "pending",
+      "evidence": [
+        "AdMob own app/rewarded/interstitial 등록, GDPR 메시지 게시됨: build/release/admob-ump-published.json",
+        "개인정보 https://www.seorilabs.com/apps/keeum/privacy/ 배포와 읽기 확인.",
+        "shared/google-play/publisher 기존 등록 identity의 실제 Play 버전 readback 성공.",
+        "사용자 승인으로 전용 업로드 키 생성/로컬+BeeStation 복원 검증/GitHub 복제본 등록 완료. 실제 SDK 검수와 AdMob 게재 확인은 남음.",
+        "Actual native SDK minimum positive cases verified; AdMob store linking and serving-ready remain pending, not implied by test ads."
+      ],
+      "checkedAt": "2026-10-21T13:00:46.492025+00:00",
+      "blocker": null
+    },
+    "observability": {
+      "status": "na",
+      "evidence": [
+        "사용자 승인: 이용 지표 수집, Firebase, 분석과 원격 설정 제외. 리텐션은 미측정. local 개발 로그와 광고 콜백 근거만 사용."
+      ],
+      "checkedAt": "2026-10-20T18:04:16.820157+00:00",
+      "blocker": null
+    }
+  },
+  "markets": {
+    "google_play": {
+      "objective": "public_live",
+      "state": "submission",
+      "identity": {
+        "applicationId": "com.seorilabs.keeum",
+        "version": "1.0.0",
+        "build": "1"
+      },
+      "gates": {
+        "candidate": {
+          "status": "pass",
+          "evidence": [
+            "https://github.com/seoleeapps/keeum/actions/runs/39521283892",
+            "build/release/v1.0.0-tag-receipt.txt: v1.0.0,source0823aae,android-code1",
+            "https://github.com/seoleeapps/keeum/releases/tag/v1.0.0"
+          ],
+          "checkedAt": "2026-10-21T00:28:30.920282+00:00",
+          "blocker": null
+        },
+        "artifact": {
+          "status": "pass",
+          "evidence": [
+            "https://github.com/seoleeapps/keeum/actions/runs/39521374449",
+            "build/release/aab-verification.json: AAB SHA2568564479ee833a29e4c0c746427aeb157133c5ec474c0d09403eda17d0b7d9eb6, 앱 전용 인증서 일치",
+            "build/release/aab-final-policy-readback.json: package/version/API36/debugfalse/productionAdMob IDs",
+            "16KB ELF2libraries aligned; raw art/audio and E2E excluded"
+          ],
+          "checkedAt": "2026-10-21T00:33:43.673133+00:00",
+          "blocker": null
+        },
+        "upload": {
+          "status": "pass",
+          "checkedAt": "2026-10-21T12:58:06.524961+00:00",
+          "evidence": [
+            "build/release/play-build1-readback-after-internal.json: internal completed versionCode1,exact AAB digest matches",
+            "build/release/internal-testers-readback.json: active, existing group2 selected/saved",
+            "build/release/play-universal-apk.json: Play generated APK package/version/signature verified",
+            "build/release/play-build1-readback-resumed.json: exactdigest/internalcompleted 재조회",
+            "build/release/play-build1-readback-console-save.json: sameAAB/code1 production completed saved, not yet review-submitted or public"
+          ],
+          "blocker": null
+        },
+        "processing": {
+          "status": "pass",
+          "checkedAt": "2026-10-21T00:40:22.370913+00:00",
+          "evidence": [
+            "build/release/play-build1-readback-after-internal.json: internal completed versionCode1,exact AAB digest matches",
+            "build/release/internal-testers-readback.json: active, existing group2 selected/saved",
+            "build/release/play-universal-apk.json: Play generated APK package/version/signature verified"
+          ],
+          "blocker": null
+        },
+        "qa": {
+          "status": "pass",
+          "evidence": [
+            "https://github.com/seoleeapps/keeum/actions/runs/39469353484",
+            "https://api.github.com/repos/seoleeapps/keeum/releases/assets/660068790",
+            "build/release/before-release-before-submission.json: latest central f73637d L3 actual exit0, exact0823 and configuration fingerprint",
+            "https://api.github.com/repos/seoleeapps/keeum/releases/assets/662503602: actual positive native integration5cases, extra native proposal partial and limitations preserved",
+            "release/evidence/android-native-1.0.0-sdk.json: same-AAB local upload-key APK; original Play APK restored; not Play Store installation, enum/form/cancel/timing native pass not claimed"
+          ],
+          "checkedAt": "2026-10-21T13:01:26.603413+00:00",
+          "blocker": null
+        },
+        "metadata": {
+          "status": "pass",
+          "evidence": [
+            "Seolee Apps developer5547060480954653351 app4975075776591973401 소유와 패키지 확인. 한국어 문구,512icon,1024x500feature,실제 화면3장 API readback 일치.",
+            "https://www.seorilabs.com/apps/keeum/privacy/"
+          ],
+          "checkedAt": "2026-10-20T18:04:16.820157+00:00",
+          "blocker": null
+        },
+        "policy": {
+          "status": "pass",
+          "checkedAt": "2026-10-21T00:47:05.807025+00:00",
+          "evidence": [
+            "build/release/aab-final-policy-readback.json",
+            "build/release/play-policy-completed.json: required declarations attention0/completed10",
+            "build/release/advertising-id-declaration-persisted.json: Yes/analytics/ads/fraud, fresh reload matched",
+            "Google GMA Next-Gen data disclosure matched saved Data safety5 types and TLS; KR IARC actual 전체이용가,18+ parent audience"
+          ],
+          "blocker": null
+        },
+        "submission": {
+          "status": "pass",
+          "evidence": [
+            "build/release/production-submission-activity.json: submissionId1,22:01KST,검토 중",
+            "build/release/production-submission-details.json: same1.0.0(1), KR1country, fullrelease, changes11, sourcePlayConsole",
+            "build/release/production-ready-for-review.json: managed publishing disabled; current account/target checked; quick-check ready before send"
+          ],
+          "checkedAt": "2026-10-21T13:03:26.851379+00:00",
+          "blocker": null
+        },
+        "approval": {
+          "status": "blocked",
+          "evidence": [
+            "build/release/production-submission-details.json: submission1, state검토 중"
+          ],
+          "checkedAt": "2026-10-21T13:03:26.851379+00:00",
+          "blocker": "Google Play 제출ID1 검토 중. 승인/공개는 미확인이고 다음 처리는 Google 심사에 달림."
+        },
+        "release": {
+          "status": "pending",
+          "evidence": [
+            "미실행. 빌드, 내부 업로드, 심사, 승인, 공개, 공개 후 최소 실행은 서로 다른 상태."
+          ],
+          "checkedAt": "2026-10-20T18:04:16.820157+00:00",
+          "blocker": null
+        },
+        "live_smoke": {
+          "status": "pending",
+          "evidence": [
+            "build/release/public-store-after-submission.json: KR HTTP404, version/public availability not confirmed; native runtime not run; reserved300seconds remain"
+          ],
+          "checkedAt": "2026-10-21T13:03:27.242081+00:00",
+          "blocker": null
+        }
+      }
+    }
+  }
+}

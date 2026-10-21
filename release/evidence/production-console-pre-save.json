@@ -1,0 +1,14 @@
+{
+  "observedAt": "2026-10-21T12:57:26.993450+00:00",
+  "url": "https://play.google.com/console/u/0/developers/5547060480954653351/app/4975075776591973401/tracks/4697736641847919315/releases/1/review",
+  "packageName": "com.seorilabs.keeum",
+  "versionCode": 1,
+  "targetSdk": 36,
+  "warnings": [
+    "optional mapping file absent",
+    "optional native debug symbols absent"
+  ],
+  "blockingErrorObserved": false,
+  "releaseNotesMatched": true,
+  "body": "Google Play Console 로드 중\nnotifications_unread\n읽지 않은 알림\nmore_vert\nhome\nbadge\nplay_prism\ndashboard\nbar_chart\noverview\nshield\nrocket_launch\nvital_signs\nfinance_mode\nsell\n프로덕션 버전 만들기\nwarning\n버전에 문제가 있습니다.\ncheck\n새 버전 출시하기\n2\n미리보기 및 확인\n임시 출시 삭제\n오류, 경고 및 메시지\nwarning\n경고 2개\n간략히\nexpand_less\n버전 코드 1 메시지 2개\nwarning\n경고\n\n이 App Bundle 유형과 연결된 가독화 파일이 없습니다. 난독화된 코드(R8/proguard)를 사용하는 경우 가독화 파일을 업로드하면 비정상 종료 및 ANR을 더 쉽게 분석하고 디버그할 수 있습니다. R8/proguard를 사용하면 앱 크기를 줄이는 데 도움이 됩니다. 자세히 알아보기\n\nwarning\n경고\n\n이 App Bundle 아티팩트 유형은 네이티브 코드를 포함하며 아직 디버그 기호가 업로드되지 않았습니다. 비정상 종료 및 ANR을 더 쉽게 분석하고 디버그할 수 있도록 기호 파일을 업로드하는 것이 좋습니다. 자세히 알아보기\n\n출시 버전 제공\n신규 설치 크기\n92.7MB\n다운로드 시간\n52초\n업데이트 크기\n새 App Bundle\n파일 형식\n버전\nAPI 수준\n타겟 SDK\n화면 레이아웃\nABI\n필수 기능\nApp bundle\ninfo\n고급\n1 (1.0.0)\n24 이상\n36\n4\narm64-v8a\n2\narrow_right_alt\n출시 노트\n기본 언어 - ko-KR\n- 매달 활동을 고르며 아이를 유아기부터 입시까지 키워 보세요.\n- 48가지 이벤트와 40가지 엔딩, 12장의 전용 그림을 만나 보세요.\n- 회차와 선택형 광고로 모은 무료 젬으로 꾸미기 아이템을 뽑을 수 있어요.\n- 로그인 없이 기기에 저장하며, 광고를 보지 않아도 끝까지 진행할 수 있어요.\n저장하면 변경사항이 게시 개요에 저장되고 검토를 위해 Google에 전송될 준비가 됩니다.\n뒤로\n저장\n제품 업데이트\n상태 대시보드\n도움말\n© 2026 Google\n개인 정보 보호\n개발자 배포 계약\n서비스 약관"
+}

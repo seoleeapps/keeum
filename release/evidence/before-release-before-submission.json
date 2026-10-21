@@ -1,0 +1,11 @@
+{
+  "recordedAt": "2026-10-21T13:01:26.603413+00:00",
+  "candidateSha": "0823aaeeb104851b36fc025a74df50bc4b5b7a18",
+  "centralSha": "f73637d7855a726e083da76fde82a6499ed53972",
+  "phase": "before-release",
+  "target": "google-play",
+  "intent": "immediately before actual production review submission",
+  "exitCode": 0,
+  "stdout": "개발 검수 근거 통과(L3): google-play before-release 0823aaeeb104851b36fc025a74df50bc4b5b7a18\n",
+  "stderr": ""
+}

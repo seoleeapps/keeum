@@ -1,0 +1,61 @@
+{
+  "observedAt": "2026-10-21T12:58:06.524961+00:00",
+  "packageName": "com.seorilabs.keeum",
+  "bundles": {
+    "kind": "androidpublisher#bundlesListResponse",
+    "bundles": [
+      {
+        "versionCode": 1,
+        "sha1": "447d997e065b9506e7a483fffebb3dd4c6328f6e",
+        "sha256": "8564479ee833a29e4c0c746427aeb157133c5ec474c0d09403eda17d0b7d9eb6"
+      }
+    ]
+  },
+  "tracks": {
+    "kind": "androidpublisher#tracksListResponse",
+    "tracks": [
+      {
+        "track": "production",
+        "releases": [
+          {
+            "name": "1.0.0 (1)",
+            "versionCodes": [
+              "1"
+            ],
+            "releaseNotes": [
+              {
+                "language": "ko-KR",
+                "text": "- 매달 활동을 고르며 아이를 유아기부터 입시까지 키워 보세요.\n- 48가지 이벤트와 40가지 엔딩, 12장의 전용 그림을 만나 보세요.\n- 회차와 선택형 광고로 모은 무료 젬으로 꾸미기 아이템을 뽑을 수 있어요.\n- 로그인 없이 기기에 저장하며, 광고를 보지 않아도 끝까지 진행할 수 있어요."
+              }
+            ],
+            "status": "completed"
+          }
+        ]
+      },
+      {
+        "track": "beta"
+      },
+      {
+        "track": "alpha"
+      },
+      {
+        "track": "internal",
+        "releases": [
+          {
+            "name": "1.0.0 (1)",
+            "versionCodes": [
+              "1"
+            ],
+            "releaseNotes": [
+              {
+                "language": "ko-KR",
+                "text": "- 매달 활동을 고르며 아이를 유아기부터 입시까지 키워 보세요.\n- 48가지 이벤트와 40가지 엔딩, 12장의 전용 그림을 만나 보세요.\n- 회차와 선택형 광고로 모은 무료 젬으로 꾸미기 아이템을 뽑을 수 있어요.\n- 로그인 없이 기기에 저장하며, 광고를 보지 않아도 끝까지 진행할 수 있어요."
+              }
+            ],
+            "status": "completed"
+          }
+        ]
+      }
+    ]
+  }
+}

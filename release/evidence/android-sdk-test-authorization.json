@@ -1,0 +1,18 @@
+{
+  "recordedAt": "2026-10-21T12:31:56.816224+00:00",
+  "userResponse": "승인",
+  "proposal": "https://github.com/seoleeapps/keeum/blob/141b0f4c766fff565588ded35cda007c96e96ba9/release/evidence/android-sdk-test-proposal.md",
+  "candidateSha": "0823aaeeb104851b36fc025a74df50bc4b5b7a18",
+  "scope": "동일 Seeker, 실제 광고 SDK 검수 최대20분, QA 설치본과 저장 삭제를 포함한 두 서명 교체 및 원래 Play APK 복원",
+  "previousActualSeconds": 1151.1197257080066,
+  "newSegmentMaxSeconds": 1200,
+  "publicReservedSeconds": 300,
+  "overallMaximumSeconds": 2651.1197257080066,
+  "executor": "/root/ui_qa",
+  "firstAdbAt": "2026-10-21T12:28:33.475Z",
+  "sdkStopAndRestoreBy": "2026-10-21T12:45:33.475Z",
+  "cleanupBy": "2026-10-21T12:48:03.475Z",
+  "hardStopAt": "2026-10-21T12:48:33.475Z",
+  "nativeResult": "in-progress-not-pass",
+  "centralSha": "17005d45dcb358b666d91ea9a2ec30a2c79b1e9a"
+}
