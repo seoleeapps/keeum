@@ -135,7 +135,7 @@
       "additionalApproval": "requested-for-this-package-retained-data-removal-only",
       "reportedAt": "2026-10-21T00:47:05.807025+00:00"
     },
-    "nextAction": "제출ID1 검토 중. 승인 후 자동 한국 전체 공개 설정, 실제 공개 스토어와 배포 버전 조회, AdMob 연결/게재 준비, 기존 예약300초 최소 실행은 남음.",
+    "nextAction": "제출ID1 검토 중. 승인 후 자동 한국 전체 공개 설정, 실제 공개 스토어와 배포 버전 조회, AdMob 앱 인증/게재 준비, 기존 예약300초 최소 실행은 남음.",
     "reportedAt": "2026-10-21T12:45:20.540410Z",
     "previousReport": "android-native-1.0.0-blocked.json",
     "latestReport": "android-native-1.0.0-sdk.json",
