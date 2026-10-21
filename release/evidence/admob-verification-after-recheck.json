@@ -1,0 +1,11 @@
+{
+  "observedAt": "2026-10-21T13:12:10.815474+00:00",
+  "appId": "ca-app-pub-9932778305312246~7499948507",
+  "packageName": "com.seorilabs.keeum",
+  "storeLinked": true,
+  "verificationPassed": false,
+  "recheckRequests": 1,
+  "servingReady": false,
+  "cause": "not established; HTTP public file matches publisher, provider crawl URL/time not yet exposed",
+  "body": "메인 콘텐츠로 건너뛰기\nclose\n앱에 앱 스토어 추가\nmore_vert\ncheck\n앱 스토어 선택\ncheck\n패키지 이름 확인\n3\n앱 인증\ncom.seorilabs.keeum (unreviewed)(Android)을(를) 확인할 수 없습니다.\n앱 스토어 정보를 업데이트했지만, 앱 인증을 완료하지 못했습니다. app-ads.txt 문제를 검토하고 해결한 후 app-ads.txt에 업데이트 사항이 있는지 확인하세요. Google에서 app-ads.txt가 찾을 수 있고 형식이 올바른 상태인지 확인합니다\n인증 문제\n발생한 문제\n\napp-ads.txt 파일을 설정했지만 세부정보가 AdMob 계정의 정보와 일치하지 않는 것 같습니다.\n\n취할 수 있는 조치\n다음 app-ads.txt 설정 안내를 열고 각 단계를 검토합니다.\napp-ads.txt 파일을 열고 정보가 올바른지 확인합니다.\n개발자 웹사이트에 수정된 파일을 게시한 후 업데이트가 있는지 확인합니다.\n업데이트 확인\napp-ads.txt에 대한 도움이 필요하신가요?\napp-ads.txt 파일에서 문제를 해결하세요.\nexpand_less\napp-ads.txt 설정 안내\napp-ads.txt 설정 안내\nIAB Tech Lab에서 제공한 사양을 사용하여 app-ads.txt 파일을 만들어야 합니다.\n다음 코드 스니펫을 복사해 app-ads.txt 파일에 붙여넣습니다.\ncontent_copy\ngoogle.com, pub-9932778305312246, DIRECT, f08c47fec0942fa0\n개발자 웹사이트의 루트에 app-ads.txt 파일을 게시합니다(예: sampledomain.com/app-ads.txt).\n\nGoogle Play 또는 App Store에 게시된 도메인을 그대로 입력해야 합니다.\n\napp-ads.txt 파일을 크롤링하여 앱을 확인합니다. app-ads.txt를 찾을 수 있고 형식이 올바른지 확인하기 위해 Google에서 몇 가지 사항을 확인합니다. 이 작업은 일반적으로 몇 분 정도 걸리지만 더 오래 걸리는 경우도 있습니다.\n자세히 알아보기\nopen_in_new\n© 2026 Google 개인정보처리방침 약관"
+}

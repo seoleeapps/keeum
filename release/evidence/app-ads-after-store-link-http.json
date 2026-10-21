@@ -1,0 +1,34 @@
+{
+  "checkedAt": "2026-10-21T13:10:51.512248+00:00",
+  "results": [
+    {
+      "url": "http://seorilabs.com/app-ads.txt",
+      "finalUrl": "http://www.seorilabs.com/app-ads.txt",
+      "status": 200,
+      "body": "# AdMob 계정 이전 기간이라 두 계정을 함께 게시한다.\n# 이전 계정의 광고 송출이 끝나면 pub-2444587584524186 줄을 지운다.\ngoogle.com, pub-9932778305312246, DIRECT, f08c47fec0942fa0\ngoogle.com, pub-2444587584524186, DIRECT, f08c47fec0942fa0\n",
+      "publisherLineExact": true
+    },
+    {
+      "url": "https://seorilabs.com/app-ads.txt",
+      "finalUrl": "https://www.seorilabs.com/app-ads.txt",
+      "status": 200,
+      "body": "# AdMob 계정 이전 기간이라 두 계정을 함께 게시한다.\n# 이전 계정의 광고 송출이 끝나면 pub-2444587584524186 줄을 지운다.\ngoogle.com, pub-9932778305312246, DIRECT, f08c47fec0942fa0\ngoogle.com, pub-2444587584524186, DIRECT, f08c47fec0942fa0\n",
+      "publisherLineExact": true
+    },
+    {
+      "url": "https://www.seorilabs.com/app-ads.txt",
+      "finalUrl": "https://www.seorilabs.com/app-ads.txt",
+      "status": 200,
+      "body": "# AdMob 계정 이전 기간이라 두 계정을 함께 게시한다.\n# 이전 계정의 광고 송출이 끝나면 pub-2444587584524186 줄을 지운다.\ngoogle.com, pub-9932778305312246, DIRECT, f08c47fec0942fa0\ngoogle.com, pub-2444587584524186, DIRECT, f08c47fec0942fa0\n",
+      "publisherLineExact": true
+    },
+    {
+      "url": "https://www.seorilabs.com/robots.txt",
+      "finalUrl": "https://www.seorilabs.com/robots.txt",
+      "status": 200,
+      "body": "User-agent: *\nAllow: /\n\nSitemap: https://www.seorilabs.com/sitemap.xml\n",
+      "publisherLineExact": false
+    }
+  ],
+  "providerTargetUrlAndCrawlTime": "not yet read from own AdMob app"
+}

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "recordedAt": "2026-10-21T11:18:58.477735+00:00",
+  "recordedAt": "2026-10-21T13:03:26.851379+00:00",
   "repository": "seoleeapps/keeum",
   "packageName": "com.seorilabs.keeum",
   "candidate": {
@@ -21,7 +21,9 @@
     "inputSteps": 900,
     "endingCorePaths": 40,
     "uiEndingRoutes": 1,
-    "nativeSdkRun": false
+    "nativeSdkRun": true,
+    "nativeSdkAdditionalProposalAllPassed": false,
+    "nativeSdkEvidence": "android-native-1.0.0-sdk.json"
   },
   "artifact": {
     "sourceSha": "0823aaeeb104851b36fc025a74df50bc4b5b7a18",
@@ -56,19 +58,28 @@
     "firebaseMetadata": false
   },
   "googlePlay": {
-    "track": "internal",
+    "track": "production",
     "releaseName": "1.0.0 (1)",
     "releaseStatus": "completed",
     "active": true,
     "testerGroup": "내부테스트 그룹",
     "testerCount": 2,
     "uploadDigestMatched": true,
-    "reviewSubmitted": false,
+    "reviewSubmitted": true,
     "publicLive": false,
     "appSigningCertificateSha256": "AE:38:4C:56:03:F5:3E:B8:CC:69:D2:C0:04:95:20:6F:7E:C0:FE:BE:24:65:8A:B2:AE:2A:44:7E:DD:DF:12:9F",
-    "checkedAt": "2026-10-21T10:54:42.781423+00:00",
+    "checkedAt": "2026-10-21T13:03:26.851379+00:00",
     "managedPublishingEnabled": false,
-    "productionTrackHasRelease": false
+    "productionTrackHasRelease": true,
+    "productionConsoleTrackId": "4697736641847919315",
+    "productionConsoleReleaseId": "1",
+    "reviewState": "검토 중",
+    "submissionId": "1",
+    "submittedAt": "2026-10-21T13:01:57.296530+00:00",
+    "submittedAtConsole": "2026-10-21 22:01 KST",
+    "reviewReadbackAt": "2026-10-21T13:03:26.851379+00:00",
+    "submissionEvidence": "production-submission-details.json",
+    "approved": false
   },
   "policy": {
     "completedDeclarations": 10,
@@ -88,35 +99,24 @@
     "retainedDataRemovalAuthorized": true,
     "retainedDataRemoved": true,
     "installOrLaunchPerformed": true,
-    "installedVia": "adb; Play-generated signed APK, not Play Store installation",
+    "installedVia": "same-AAB local upload-key APK tested via adb; original Play-signed APK restored via adb, no Play Store installation",
     "versionName": "1.0.0",
     "versionCode": 1,
     "apkSha256": "dff8b9e734d80c82fe67112c176056d91ca10bb359eadcd91ff81524ce829053",
     "configurationFingerprint": "e7b3bd5e6713a049addf519eaf43ff05ae7f05630b40b80cd1f7a1ff355b634c",
-    "nativeSdkStatus": "blocked-before-sdk",
-    "nativeUmpGmaPassedCount": 0,
-    "blockers": [
-      {
-        "id": "play-installer-protection",
-        "observation": "Play 생성 APK의 LicenseClient가 adb 설치 출처를 거절하고 앱 프로세스가 종료됨",
-        "exactLog": "Local install check failed due to wrong installer."
-      },
-      {
-        "id": "native-play-download-item-not-found",
-        "observation": "실제 내부 테스트 참여 성공 후 Download test app도 항목 없음. native Play 현재 계정은 라벨 부재로 미확인. 계정 문제나 네트워크 문제로 원인을 단정하지 않음."
-      }
-    ],
+    "nativeSdkStatus": "actual-native-integration-positive-cases-verified; additional-proposal-partial",
+    "nativeUmpGmaPassedCount": 5,
     "timing": {
-      "thisSegmentSeconds": 658.9890781250142,
-      "previousCumulativeSeconds": 492.1306475829923,
-      "cumulativeDeviceSeconds": 1151.1197257080066,
-      "totalApprovedSeconds": 1500,
-      "remainingOverallSeconds": 348.8802742919934,
+      "thisSegmentSeconds": 1007.0646968749934,
+      "previousCumulativeSeconds": 1151.1197257080066,
+      "cumulativeDeviceSeconds": 2158.184422583,
+      "totalApprovedMaximumIncludingPublicSeconds": 2651.1197257080066,
+      "remainingOverallSeconds": 492.9353031250066,
       "publicReservedSeconds": 300,
-      "remainingExcludingPublicSeconds": 48.88027429199337,
-      "unusedThis707SecondSegment": 48.0109218749858
+      "remainingExcludingPublicSeconds": 192.9353031250066,
+      "closedSegmentMayNotBeRestarted": true
     },
-    "publicSummary": "android-native-1.0.0-blocked.json",
+    "publicSummary": "android-native-1.0.0-sdk.json",
     "previousStop": {
       "sourceSha": "0823aaeeb104851b36fc025a74df50bc4b5b7a18",
       "device": "Seeker",
@@ -135,10 +135,10 @@
       "additionalApproval": "requested-for-this-package-retained-data-removal-only",
       "reportedAt": "2026-10-21T00:47:05.807025+00:00"
     },
-    "nextAction": "같은 AAB 로컬 검수 APK로 서명 교체와 추가20분 기기 사용 승인 대기. 원래 Play 서명 APK 복원 포함. 공개5분 예약 유지.",
-    "reportedAt": "2026-10-21T11:07:21.204934Z",
+    "nextAction": "제출ID1 검토 중. 승인 후 자동 한국 전체 공개 설정, 실제 공개 스토어와 배포 버전 조회, AdMob 앱 인증/게재 준비, 기존 예약300초 최소 실행은 남음.",
+    "reportedAt": "2026-10-21T12:45:20.540410Z",
     "previousReport": "android-native-1.0.0-blocked.json",
-    "latestReport": "android-native-1.0.0-wifi-review.json",
+    "latestReport": "android-native-1.0.0-sdk.json",
     "wifi": {
       "observed": "기존 Wi-Fi 활성, 연결, 기본 네트워크와 VALIDATED 확인",
       "settingsChanges": 0,
@@ -153,17 +153,73 @@
       "accountOrTesterListChanged": false,
       "actualDownloadResult": "실제 Download test app도 항목을 찾을 수 없습니다."
     },
-    "nativePlayCurrentIdentity": "미확인. 계정 변경이나 로그인 없음."
+    "nativePlayCurrentIdentity": "미확인. 계정 변경이나 로그인 없음.",
+    "nativePassCountMeaning": "Five actually observed positive integration scenarios only; not all proposed device cases",
+    "historicalUnresolvedPlayDistributionIssues": [
+      {
+        "id": "play-installer-protection",
+        "observation": "Play 생성 APK의 LicenseClient가 adb 설치 출처를 거절하고 앱 프로세스가 종료됨",
+        "exactLog": "Local install check failed due to wrong installer."
+      },
+      {
+        "id": "native-play-download-item-not-found",
+        "observation": "실제 내부 테스트 참여 성공 후 Download test app도 항목 없음. native Play 현재 계정은 라벨 부재로 미확인. 계정 문제나 네트워크 문제로 원인을 단정하지 않음."
+      }
+    ],
+    "testedApkSha256": "95eb152e607ea8d5615e5bc3acc726e2dcdb743a0f7835d0a060aa66c2f139c0",
+    "restoration": {
+      "status": "passed",
+      "artifactSha256": "dff8b9e734d80c82fe67112c176056d91ca10bb359eadcd91ff81524ce829053",
+      "artifactCertificateSha256": "ae384c5603f53eb8cc69d2c00495206f7ec0febe24658ab2ae2a447edddf129f",
+      "packageVersionVerified": true,
+      "packageManagerSignatureRecordMatchedKnownPlayArtifact": true,
+      "packageManagerRecordIsNotCertificateSha256": true,
+      "installedVia": "adb",
+      "playStoreInstalled": false,
+      "appStoppedNotLaunched": true,
+      "qaDataDeleted": true,
+      "actualDeleteCount": 2,
+      "actualInstallCount": 2
+    },
+    "notVerifiedOnDevice": [
+      {
+        "id": "ump-consent-status-enum",
+        "reason": "명시 ConsentStatus enum이 로그에 노출되지 않았다. gdprApplies=0을 NOT_REQUIRED enum으로 간주하지 않는다."
+      },
+      {
+        "id": "ump-consent-form-display",
+        "reason": "동의창이 표시되지 않았다. 필수 여부를 확정하거나 동의창 표시 통과로 기록하지 않는다."
+      },
+      {
+        "id": "rewarded-cancel-no-reward",
+        "reason": "첫 Back은 5초 보상 기준 뒤여서 완료였다. 다음 광고에서 Test Ad 확인 후 1.719초에 Back을 입력했으나 광고가 계속 표시됐고 늦게 닫은 뒤 활동 보너스가 열렸다. 보상 전 취소와 무보상은 확인하지 못했다."
+      },
+      {
+        "id": "rewarded-less-than-60-seconds",
+        "reason": "실제 다음 광고 요청은 앞 광고 종료 약 246.805초 뒤였다. 60초 미만 차단 경계는 실행하지 않았다."
+      },
+      {
+        "id": "interstitial-after-rewarded-180-seconds",
+        "reason": "보상형 종료 뒤 다음 학기 홈 경로에 도달하지 못해 실제 180초 억제는 확인하지 않았다."
+      }
+    ],
+    "logLimit": "자체 앱 UID 원문 로그는 12:32:30 UTC 무렵까지만 수집됐다. 이후 광고 표시는 직접 본 PNG와 실제 입력 기록으로 판정했다. 미수집 구간의 오류 부재를 주장하지 않는다."
   },
   "admob": {
     "appId": "ca-app-pub-9932778305312246~7499948507",
     "rewardedUnit": "ca-app-pub-9932778305312246/1213916766",
     "interstitialUnit": "ca-app-pub-9932778305312246/6386352398",
     "umpMessage": "published",
-    "playStoreLinked": false,
+    "playStoreLinked": true,
     "servingReady": false,
-    "checkedAt": "2026-10-21T09:34:04.165295+00:00",
-    "storeSearchResult": "exact package no result; no connection saved"
+    "checkedAt": "2026-10-21T13:13:22.331110+00:00",
+    "storeSearchResult": "exact unreviewed package found after production submission; exact Play URL verified and connection saved/read back",
+    "appVerificationPassed": false,
+    "recheckRequests": 1,
+    "publisherLineHttp200Matched": true,
+    "providerOwnCrawlUrlAndTimeAvailable": false,
+    "verificationFailureCause": "not established",
+    "evidence": "admob-linked-row-readback.json"
   },
   "archives": {
     "developmentQa": {
@@ -186,19 +242,25 @@
       "name": "native-wifi-and-sdk-proposal-1.0.0-evidence.zip",
       "sha256": "25cfd4053acb3c64a368a1b2b0adbd41298da186b06baf288ea9966694d6ba3f",
       "apkAndRawDeviceFilesPublished": false
+    },
+    "nativeSdkActual": {
+      "apiUrl": "https://api.github.com/repos/seoleeapps/keeum/releases/assets/662503602",
+      "name": "native-sdk-actual-1.0.0-evidence.zip",
+      "sha256": "cdd296452a6cb846108c68c631c4144318572f71ffaa4ea8c8343094ad555c5a",
+      "apkAndRawDeviceFilesPublished": false
     }
   },
   "retention": "unmeasured",
   "centralBeforeRelease": {
-    "checkedAt": "2026-10-21T11:14:58.613534+00:00",
-    "centralSha": "a6dc6937f37eb5783ae249cfc315ba00f11fabfc",
-    "ok": false,
-    "errors": [
-      "TEST_LEVEL_BELOW_FLOOR platform-first ads android"
-    ]
+    "checkedAt": "2026-10-21T13:01:26.603413+00:00",
+    "centralSha": "f73637d7855a726e083da76fde82a6499ed53972",
+    "ok": true,
+    "errors": [],
+    "receipt": "before-release-before-submission.json",
+    "evidenceAsset": "https://github.com/seoleeapps/keeum/releases/download/v1.0.0/development-evidence.google-play.before-release.json"
   },
   "localSdkArtifact": {
-    "status": "prepared-not-installed",
+    "status": "tested-and-removed-original-play-apk-restored",
     "sourceSha": "0823aaeeb104851b36fc025a74df50bc4b5b7a18",
     "aabSha256": "8564479ee833a29e4c0c746427aeb157133c5ec474c0d09403eda17d0b7d9eb6",
     "apkSha256": "95eb152e607ea8d5615e5bc3acc726e2dcdb743a0f7835d0a060aa66c2f139c0",
@@ -217,15 +279,26 @@
     "originalPartialCheck": "원래5개 검사는 DEX3개와 네이티브2개만 포함했다. 독립 검수에서 게임 에셋을 포함한629개 전체 대조로 보완했다.",
     "artifactReview": "android-sdk-artifact-review.md",
     "proposedTestPlan": "android-sdk-test-proposal.md",
-    "deviceApprovalStatus": "requested-not-received",
+    "deviceApprovalStatus": "approved-specific-20-minute-same-device-and-two-qa-replacements",
     "newNativeLimitSeconds": 1200,
     "priorActualDeviceSeconds": 1151.1197257080066,
     "publicSmokeReservedSeconds": 300,
     "proposedOverallMaximumSeconds": 2651.1197257080066,
-    "actualNativeSdkPassedCount": 0,
+    "actualNativeSdkPassedCount": 5,
     "publicPlayArtifactChanged": false,
     "plannedSignatureReplacementCount": 2,
     "plannedQaDataDeletionOnEachReplacement": true,
-    "plannedOriginalPlayApkRestoration": true
+    "plannedOriginalPlayApkRestoration": true,
+    "authorization": "android-sdk-test-authorization.json",
+    "proposalAllScenariosPassed": false,
+    "restorationCompleted": true,
+    "actualQaDataDeletions": 2,
+    "actualInstalls": 2
+  },
+  "publicStoreReadback": {
+    "checkedAt": "2026-10-21T13:03:27.242081+00:00",
+    "country": "KR",
+    "httpStatus": 404,
+    "nativeRuntimeExecuted": false
   }
 }
