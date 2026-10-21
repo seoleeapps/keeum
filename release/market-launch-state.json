@@ -48,16 +48,19 @@
       "blocker": null
     },
     "production_dependencies": {
-      "status": "pending",
+      "status": "blocked",
       "evidence": [
         "AdMob own app/rewarded/interstitial 등록, GDPR 메시지 게시됨: build/release/admob-ump-published.json",
         "개인정보 https://www.seorilabs.com/apps/keeum/privacy/ 배포와 읽기 확인.",
         "shared/google-play/publisher 기존 등록 identity의 실제 Play 버전 readback 성공.",
         "사용자 승인으로 전용 업로드 키 생성/로컬+BeeStation 복원 검증/GitHub 복제본 등록 완료. 실제 SDK 검수와 AdMob 게재 확인은 남음.",
-        "Actual native SDK minimum positive cases verified; AdMob store linking and serving-ready remain pending, not implied by test ads."
+        "Actual native SDK minimum positive cases verified; AdMob store linking and serving-ready remain pending, not implied by test ads.",
+        "build/release/admob-linked-row-readback.json: sameappId/package linked,2units retained, verification/serving not ready",
+        "build/release/app-ads-after-store-link-http.json: exact provider publisherline HTTP200 and robots allow",
+        "build/release/admob-own-appads-all-pages.json: all22rows across2pages; no own crawl URL/time available"
       ],
-      "checkedAt": "2026-10-21T13:00:46.492025+00:00",
-      "blocker": null
+      "checkedAt": "2026-10-21T13:14:36.925656+00:00",
+      "blocker": "AdMob 동일 Play 패키지 연결은 저장됐으나 앱 인증 미완료/게재 제한. 공개 publisher행과HTTP/robots는 정상이며 실제 대상 크롤링URL/시각은 확인되지 않아 원인을 확정하지 않음."
     },
     "observability": {
       "status": "na",

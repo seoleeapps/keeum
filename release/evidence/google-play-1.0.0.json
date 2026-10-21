@@ -210,10 +210,16 @@
     "rewardedUnit": "ca-app-pub-9932778305312246/1213916766",
     "interstitialUnit": "ca-app-pub-9932778305312246/6386352398",
     "umpMessage": "published",
-    "playStoreLinked": false,
+    "playStoreLinked": true,
     "servingReady": false,
-    "checkedAt": "2026-10-21T12:29:53.206247+00:00",
-    "storeSearchResult": "exact package no result; no connection saved"
+    "checkedAt": "2026-10-21T13:13:22.331110+00:00",
+    "storeSearchResult": "exact unreviewed package found after production submission; exact Play URL verified and connection saved/read back",
+    "appVerificationPassed": false,
+    "recheckRequests": 1,
+    "publisherLineHttp200Matched": true,
+    "providerOwnCrawlUrlAndTimeAvailable": false,
+    "verificationFailureCause": "not established",
+    "evidence": "admob-linked-row-readback.json"
   },
   "archives": {
     "developmentQa": {
