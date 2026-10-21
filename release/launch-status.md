@@ -1,30 +1,30 @@
 # Google Play 첫 출시 상태
 
-2026-10-21. 공개 목표는 한국 Google Play 전체 배포다. 빌드와 업로드, 심사, 승인, 공개, 광고 게재를 별도로 판정한다.
+2026-10-21. **내부 테스트 활성, 실제 광고 검수 정지** 상태다. 공개 목표는 Seolee Apps의 한국 전체 배포이며 심사는 아직 제출하지 않았다.
 
-| 항목 | 현재 확인 |
+| 항목 | 확인 상태 |
 | --- | --- |
-| Play 소유 계정 | Seolee Apps 개인 계정, 라이브 Console에서 확인 |
-| Play 앱 | 내 새끼 대학 보내기, com.seorilabs.keeum, Console 앱 4975075776591973401 등록 |
-| AdMob 앱 | ca-app-pub-9932778305312246~7499948507 |
-| 보상형 | keeum_rewarded, ca-app-pub-9932778305312246/1213916766 |
-| 전면 광고 | keeum_interstitial, ca-app-pub-9932778305312246/6386352398 |
-| AdMob 실제 게재 | 검토 필요, 공개 스토어 연결과 제공자 확인 전 |
-| 프로덕션 업로드 키 | 카탈로그에 app/keeum/google-play/upload-key 없음. 다른 앱 키 사용 금지 |
-| 개발 검수 | PR #61과 #62 병합. 독립 검수에서 macOS import 캐시의 이미지와 소리 remap 누락을 찾아 수정한다. 실제 리소스 로딩 검사를 E2E에 추가했다. 최초 오류, 중단, 폴백 화면과 재검수 기록은 보존하며 최종 SHA의 CI와 독립 UI 3회는 별도로 완료해야 함 |
-| 추가 CG | 부모 얼굴이 보이던 5장을 기존 표현 규칙에 맞춰 수정, 처음 생성한 원본 보존. 새 6장의 실제 크기를 1920×1080으로 최종화하고 독립 정적 검토 통과. 최종 후보 실행 화면 검수와 구분 |
-| 기기 검수 | 접근하지 않음. 실제 SDK, UMP 동의 창과 광고 복귀만 개발 검수 후 소명하고 별도 사용 승인 필요 |
-| 스토어 메타데이터 | 소개 문구, 아이콘, 기능 그래픽, 실제 화면 3장 API readback 일치. 개인정보와 광고, 로그인, 타겟층, 데이터 보안, IARC 설문 저장 |
-| 실제 한국 IARC 결과 | 전체이용가. 목표 15세와 구분하며 심사 결과를 다시 확인 |
-| 서명 AAB와 16KB | 미빌드, 미검증 |
-| 내부 테스트 | 미업로드 |
-| 심사, 승인, 한국 공개 | 미진행 |
+| 출시 후보 | v1.0.0, code 1, 0823aaeeb104851b36fc025a74df50bc4b5b7a18 |
+| 제품과 소유 | 내 새끼 대학 보내기, com.seorilabs.keeum, Seolee Apps 개인 계정 |
+| 콘텐츠 | 활동 24, 이벤트 48, 엔딩 40, 전용 CG 12 |
+| 개발 검수 | 같은 후보 CI, 독립 코어와 UI 3회 통과. 대표 UI48턴과 40종 코어 경로를 구분 |
+| 서명 | 승인 후 앱 전용 업로드 키 생성, 로컬과 BeeStation 복원 검증, GitHub 실행 복제본과 Play 배포 서명 대조 완료 |
+| AAB | CI 서명 빌드 성공. 실제 API 36,debug=false,운영 광고ID,16KB ELF 2개와 재생성 원본 제외 확인 |
+| 내부 테스트 | 1.0.0(1) completed. 기존 내부테스트 그룹 2명 선택과 저장 재조회, 트랙 활성 |
+| 실제 Android 광고 | Seeker의 제거된 디버그 keeum에 남은 데이터와 서명 기록을 발견해 설치 전 정지. 실제 SDK와 UMP, 테스트 광고는 미실행 |
+| 데이터 추가 승인 | 잔여 keeum 데이터만 삭제하고 Play 서명 설치본으로 교체하는 선택을 사용자에게 요청. 응답 전 삭제나 교체 금지 |
+| 스토어 등록 | 문구, 아이콘, 기능 그래픽과 실제 화면 3장 readback 일치. 개인정보와 광고, 데이터 보안, IARC와 광고ID 선언 저장. 주의 필요 0개 |
+| 실제 한국 IARC 결과 | 전체이용가. 목표 15세와 구분, 최종 심사 결과 확인 전 |
+| AdMob | 앱과 광고 단위 2개 등록, keeum 전용 GDPR 메시지 게시. 스토어 검색 결과 없음, 검토 필요와 게재 제한 상태. 실제 게재 통과 아님 |
+| 심사, 승인, 공개 | 미진행 |
 | 리텐션 | 미측정 |
 
-승인 범위: docs/design/2026-10-21-google-play-launch. 실행 이슈: https://github.com/seoleeapps/keeum/issues/60
+[설계와 승인](../docs/design/2026-10-21-google-play-launch/design.md), [QA 계획](../docs/game-design/07-qa-launch-plan.md), [실행 이슈 #60](https://github.com/seoleeapps/keeum/issues/60), [기계 판독 근거](evidence/google-play-1.0.0.json).
 
-태그 생성, 번호 원장 초기화와 재빌드 없는 내부 테스트에서 프로덕션 승격은 각각 중앙 재사용 워크플로를 호출한다. 태그와 원장 초기화는 기본 계산 전용이며 main이나 PR에서 실행하지 않는다. 첫 태그는 v1.0.0을 명시하고, 원장은 실제 Play 버전 조회 결과로만 초기화한다. 태그 생성 전 같은 후보의 개발 검수와 서명 준비를 완료한다. 서명 AAB만 확인할 때는 deploy-google-play.yml의 upload=false를 사용하며, 이 경우도 중앙 before-build 검증을 생략하지 않는다.
+[태그 발급](https://github.com/seoleeapps/keeum/actions/runs/39521283892), [서명 빌드](https://github.com/seoleeapps/keeum/actions/runs/39521374449), [같은 후보 E2E](https://github.com/seoleeapps/keeum/actions/runs/39469353484), [Release와 증거](https://github.com/seoleeapps/keeum/releases/tag/v1.0.0).
 
-개인정보처리방침은 https://github.com/seorilabs/seorilabs-official/pull/83 에서 병합, 배포했다. 실제 URL의 HTTP 200과 본문을 읽어 확인한다.
+AAB SHA-256은 `8564479ee833a29e4c0c746427aeb157133c5ec474c0d09403eda17d0b7d9eb6`이다. Play API가 같은 해시와 versionCode 1, internal completed를 반환했다. Play가 생성한 APK도 버전과 배포 인증서가 일치했다. adb 설치를 Play Store 설치로 주장하지 않는다.
 
-필수 남은 항목은 프로덕션 키 신규 등록, 실제 Android 광고 SDK와 UMP 검증, 최종 SHA CI와 독립 UI 검수, AAB 검증, 최종 AAB에 대한 데이터 보안과 IARC 재확인, 테스트와 심사, 공개 스토어와 최소 실행 확인이다. 출시 지시는 공개까지 유효하며, 별도 기기 사용과 자격증명 생성 승인은 대신하지 않는다.
+한국 공개, 업로드 키 생성과 등록, Android 한 대 총25분은 이미 승인받았다. 약 2분의 조회 뒤 정지했으며 추가 요청은 이 패키지의 잔여 데이터 삭제와 설치 후 최대 18분 검수다. 공개 후 같은 기기 최소5분을 유지한다. 저장 내용과 다른 앱을 읽거나 변경하지 않았다.
+
+실제 광고 검수 통과 후 중앙 before-release를 다시 실행한다. 그 뒤 같은 AAB를 한국 프로덕션으로 승격하고 심사, 승인, 공개 스토어와 최소 실행까지 진행한다. 이 문서 업데이트로 이미 빌드한 v1.0.0 태그나 출시 후보를 바꾸지 않는다.
