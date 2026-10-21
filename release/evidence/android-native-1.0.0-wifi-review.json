@@ -1,0 +1,63 @@
+{
+  "sourceSha": "0823aaeeb104851b36fc025a74df50bc4b5b7a18",
+  "package": "com.seorilabs.keeum",
+  "versionName": "1.0.0",
+  "versionCode": 1,
+  "device": "승인된 Android 기기 한 대",
+  "plannedAt": "2026-10-21T10:55:34.908605Z",
+  "startedAt": "2026-10-21T10:56:22.211255Z",
+  "completedAt": "2026-10-21T11:07:21.204934Z",
+  "status": "blocked",
+  "wifi": {
+    "observed": "기존 Wi-Fi 활성, 연결, 기본 네트워크와 VALIDATED 확인",
+    "settingsChanges": 0,
+    "reconnectionPerformed": false,
+    "restoreRequired": false,
+    "ssidOrAddressRetained": false
+  },
+  "testAccess": {
+    "genericUrl": "일반형 테스트 URL은 App not available, 실제 Console 내부 테스트 링크로 수정",
+    "actualInviteAccepted": true,
+    "actualInviteResult": "테스터 상태 확인",
+    "accountOrTesterListChanged": false,
+    "actualDownloadResult": "실제 Download test app도 항목을 찾을 수 없습니다."
+  },
+  "installedArtifact": {
+    "apkSha256": "dff8b9e734d80c82fe67112c176056d91ca10bb359eadcd91ff81524ce829053",
+    "configurationFingerprint": "e7b3bd5e6713a049addf519eaf43ff05ae7f05630b40b80cd1f7a1ff355b634c",
+    "installationSource": "이전 adb 설치 유지. Play Store 설치로 확인되지 않음.",
+    "reinstalledOrDataDeletedThisSegment": false
+  },
+  "launchAfterTestOptIn": {
+    "count": 1,
+    "result": "LicenseClient 설치 출처 검사 후 프로세스 종료. 실제 SDK 오류 판정과 구분.",
+    "exactLog": "Local install check failed due to wrong installer."
+  },
+  "nativePlayCurrentIdentity": "미확인. 계정 변경이나 로그인 없음.",
+  "nativeUmpGmaPassedCount": 0,
+  "notVerified": [
+    "UMP 실제 응답 상태",
+    "필요한 UMP 동의 창",
+    "GMA 초기화",
+    "광고 요청과 로드",
+    "Test Ad 표시",
+    "보상형 취소 후 지급0",
+    "실제60초 뒤 보상형 완료 지급60 한 번",
+    "광고 종료 후 게임 복귀",
+    "두 번째 세션 학기 종료 홈 전면 광고",
+    "보상형 후180초 미만 전면 광고 차단"
+  ],
+  "timing": {
+    "thisSegmentSeconds": 658.9890781250142,
+    "previousCumulativeSeconds": 492.1306475829923,
+    "cumulativeDeviceSeconds": 1151.1197257080066,
+    "totalApprovedSeconds": 1500,
+    "remainingOverallSeconds": 348.8802742919934,
+    "publicReservedSeconds": 300,
+    "remainingExcludingPublicSeconds": 48.88027429199337,
+    "unusedThis707SecondSegment": 48.0109218749858
+  },
+  "publicSmokeStarted": false,
+  "noFurtherAdbWithoutNewApproval": true,
+  "privacy": "원시 기기 식별자, 선택 계정 값, 타 앱 화면과 추천 콘텐츠는 공개용 요약에 포함하지 않음"
+}
