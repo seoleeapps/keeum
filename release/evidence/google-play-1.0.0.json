@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "recordedAt": "2026-10-21T09:39:28.305265+00:00",
+  "recordedAt": "2026-10-21T11:18:58.477735+00:00",
   "repository": "seoleeapps/keeum",
   "packageName": "com.seorilabs.keeum",
   "candidate": {
@@ -66,7 +66,7 @@
     "reviewSubmitted": false,
     "publicLive": false,
     "appSigningCertificateSha256": "AE:38:4C:56:03:F5:3E:B8:CC:69:D2:C0:04:95:20:6F:7E:C0:FE:BE:24:65:8A:B2:AE:2A:44:7E:DD:DF:12:9F",
-    "checkedAt": "2026-10-21T09:30:31.726599+00:00",
+    "checkedAt": "2026-10-21T10:54:42.781423+00:00",
     "managedPublishingEnabled": false,
     "productionTrackHasRelease": false
   },
@@ -102,19 +102,19 @@
         "exactLog": "Local install check failed due to wrong installer."
       },
       {
-        "id": "play-own-package-detail-offline",
-        "observation": "같은 패키지의 Play 상세 링크도 오프라인 상태 안내로 막혀 실제 Play 설치를 계속하지 못함"
+        "id": "native-play-download-item-not-found",
+        "observation": "실제 내부 테스트 참여 성공 후 Download test app도 항목 없음. native Play 현재 계정은 라벨 부재로 미확인. 계정 문제나 네트워크 문제로 원인을 단정하지 않음."
       }
     ],
     "timing": {
-      "previousSegmentSeconds": 118.6979,
-      "supplementarySegmentSeconds": 373.4327475829923,
-      "cumulativeDeviceSeconds": 492.1306475829923,
-      "overallApprovedSeconds": 1500,
-      "remainingOverallSeconds": 1007.8693524170077,
-      "publicSmokeReservedSeconds": 300,
-      "remainingExcludingPublicReservationSeconds": 707.8693524170077,
-      "supplementary18MinuteUnusedSeconds": 706.5672524170077
+      "thisSegmentSeconds": 658.9890781250142,
+      "previousCumulativeSeconds": 492.1306475829923,
+      "cumulativeDeviceSeconds": 1151.1197257080066,
+      "totalApprovedSeconds": 1500,
+      "remainingOverallSeconds": 348.8802742919934,
+      "publicReservedSeconds": 300,
+      "remainingExcludingPublicSeconds": 48.88027429199337,
+      "unusedThis707SecondSegment": 48.0109218749858
     },
     "publicSummary": "android-native-1.0.0-blocked.json",
     "previousStop": {
@@ -135,8 +135,25 @@
       "additionalApproval": "requested-for-this-package-retained-data-removal-only",
       "reportedAt": "2026-10-21T00:47:05.807025+00:00"
     },
-    "nextAction": "추가 승인 전 기기 조작 금지. 기존 Wi-Fi 연결 복구 또는 사용자의 직접 복구 후 같은 후보 검수 재개 선택 대기.",
-    "reportedAt": "2026-10-21T09:37:55.120363Z"
+    "nextAction": "같은 AAB 로컬 검수 APK로 서명 교체와 추가20분 기기 사용 승인 대기. 원래 Play 서명 APK 복원 포함. 공개5분 예약 유지.",
+    "reportedAt": "2026-10-21T11:07:21.204934Z",
+    "previousReport": "android-native-1.0.0-blocked.json",
+    "latestReport": "android-native-1.0.0-wifi-review.json",
+    "wifi": {
+      "observed": "기존 Wi-Fi 활성, 연결, 기본 네트워크와 VALIDATED 확인",
+      "settingsChanges": 0,
+      "reconnectionPerformed": false,
+      "restoreRequired": false,
+      "ssidOrAddressRetained": false
+    },
+    "testAccess": {
+      "genericUrl": "일반형 테스트 URL은 App not available, 실제 Console 내부 테스트 링크로 수정",
+      "actualInviteAccepted": true,
+      "actualInviteResult": "테스터 상태 확인",
+      "accountOrTesterListChanged": false,
+      "actualDownloadResult": "실제 Download test app도 항목을 찾을 수 없습니다."
+    },
+    "nativePlayCurrentIdentity": "미확인. 계정 변경이나 로그인 없음."
   },
   "admob": {
     "appId": "ca-app-pub-9932778305312246~7499948507",
@@ -163,14 +180,52 @@
       "name": "native-sdk-blocked-1.0.0-evidence.zip",
       "sha256": "7343804308a78d207f046b112260222770099141c15c11eb3af23698cfc3ed79",
       "rawDeviceEvidencePublished": false
+    },
+    "wifiAndSdkProposal": {
+      "apiUrl": "https://api.github.com/repos/seoleeapps/keeum/releases/assets/662254047",
+      "name": "native-wifi-and-sdk-proposal-1.0.0-evidence.zip",
+      "sha256": "25cfd4053acb3c64a368a1b2b0adbd41298da186b06baf288ea9966694d6ba3f",
+      "apkAndRawDeviceFilesPublished": false
     }
   },
   "retention": "unmeasured",
   "centralBeforeRelease": {
-    "checkedAt": "2026-10-21T09:37:43.265266+00:00",
+    "checkedAt": "2026-10-21T11:14:58.613534+00:00",
+    "centralSha": "a6dc6937f37eb5783ae249cfc315ba00f11fabfc",
     "ok": false,
     "errors": [
       "TEST_LEVEL_BELOW_FLOOR platform-first ads android"
     ]
+  },
+  "localSdkArtifact": {
+    "status": "prepared-not-installed",
+    "sourceSha": "0823aaeeb104851b36fc025a74df50bc4b5b7a18",
+    "aabSha256": "8564479ee833a29e4c0c746427aeb157133c5ec474c0d09403eda17d0b7d9eb6",
+    "apkSha256": "95eb152e607ea8d5615e5bc3acc726e2dcdb743a0f7835d0a060aa66c2f139c0",
+    "bytes": 142404359,
+    "signingIdentity": "app/keeum/google-play/upload-key",
+    "uploadCertificateSha256": "77:F9:26:3D:24:F7:F9:A2:BD:05:93:4C:6F:BF:73:4C:0E:D3:A0:95:6A:82:D4:3F:07:6D:20:C3:A7:AF:1E:16",
+    "configurationFingerprint": "e7b3bd5e6713a049addf519eaf43ff05ae7f05630b40b80cd1f7a1ff355b634c",
+    "sourcePayloadExactByteMatches": {
+      "gameAssets": 622,
+      "dex": 3,
+      "nativeLibraries": 2,
+      "baselineProfiles": 2,
+      "total": 629,
+      "mismatches": 0
+    },
+    "originalPartialCheck": "원래5개 검사는 DEX3개와 네이티브2개만 포함했다. 독립 검수에서 게임 에셋을 포함한629개 전체 대조로 보완했다.",
+    "artifactReview": "android-sdk-artifact-review.md",
+    "proposedTestPlan": "android-sdk-test-proposal.md",
+    "deviceApprovalStatus": "requested-not-received",
+    "newNativeLimitSeconds": 1200,
+    "priorActualDeviceSeconds": 1151.1197257080066,
+    "publicSmokeReservedSeconds": 300,
+    "proposedOverallMaximumSeconds": 2651.1197257080066,
+    "actualNativeSdkPassedCount": 0,
+    "publicPlayArtifactChanged": false,
+    "plannedSignatureReplacementCount": 2,
+    "plannedQaDataDeletionOnEachReplacement": true,
+    "plannedOriginalPlayApkRestoration": true
   }
 }
