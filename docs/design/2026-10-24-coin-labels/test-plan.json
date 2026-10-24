@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "level": "L1",
+  "baseline": "v1.0.0",
+  "changedFeatures": [
+    "core-loop"
+  ],
+  "environments": [
+    "dev"
+  ],
+  "redesign": false,
+  "foundationRerun": false,
+  "floorOverrides": [],
+  "release": {
+    "markets": [
+      "google-play"
+    ],
+    "until": "public",
+    "rollout": 1
+  }
+}
