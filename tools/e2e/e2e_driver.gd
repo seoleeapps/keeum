@@ -100,6 +100,12 @@ func tap(control: Control) -> bool:
 		return false
 	var pos := control.get_global_rect().get_center()
 	if not Rect2(Vector2.ZERO, Vector2(viewport.size)).has_point(pos): return false
+	# 화면 전환 뒤 남은 hover 위치도 실제 포인터 이동으로 갱신한다.
+	var motion := InputEventMouseMotion.new()
+	motion.position = pos
+	motion.global_position = pos
+	viewport.push_input(motion)
+	await frames(1)
 	var received := [false]
 	var is_button := control is BaseButton
 	var mark := func() -> void: received[0] = true
