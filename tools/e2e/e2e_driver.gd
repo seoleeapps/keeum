@@ -100,6 +100,12 @@ func tap(control: Control) -> bool:
 		return false
 	var pos := control.get_global_rect().get_center()
 	if not Rect2(Vector2.ZERO, Vector2(viewport.size)).has_point(pos): return false
+	# 화면 전환 뒤 남은 hover 위치도 실제 포인터 이동으로 갱신한다.
+	var motion := InputEventMouseMotion.new()
+	motion.position = pos
+	motion.global_position = pos
+	viewport.push_input(motion)
+	await frames(1)
 	var received := [false]
 	var is_button := control is BaseButton
 	var mark := func() -> void: received[0] = true
@@ -164,7 +170,8 @@ func scroll_into_view(control: Control, max_drags := 30) -> bool:
 func shot(name: String) -> void:
 	if not capture:
 		return
-	await RenderingServer.frame_post_draw
+	await frames(2)
+	RenderingServer.force_draw(false)
 	var path := out_dir.path_join("%s.png" % name)
 	viewport.get_texture().get_image().save_png(path)
 	_current.screenshots.append(path.get_file())

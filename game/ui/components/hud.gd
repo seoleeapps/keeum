@@ -17,7 +17,7 @@ static func build(run: GameRun) -> Control:
 	top.add_child(UIKit.spacer())
 	var money := run.household.money
 	var premium := GameController.profile.premium
-	var money_label := UIKit.label("%d" % money, 24, UIKit.MONEY)
+	var money_label := UIKit.label("%d 코인" % money, 24, UIKit.MONEY)
 	var mbox := UIKit.hbox(6)
 	mbox.add_child(UIKit.icon("coin", UIKit.sz(24) + 2, UIKit.MONEY))
 	mbox.add_child(money_label)
@@ -35,7 +35,7 @@ static func build(run: GameRun) -> Control:
 
 	# 재화 증감 카운트업(직전 홈 방문 대비)
 	if _last_money >= 0 and _last_money != money:
-		FX.count_up(money_label, money, _last_money, 0.6)
+		FX.count_up(money_label, money, _last_money, 0.6, "%d 코인")
 	if _last_premium >= 0 and _last_premium != premium:
 		FX.count_up(prem_label, premium, _last_premium, 0.6)
 	_last_money = money

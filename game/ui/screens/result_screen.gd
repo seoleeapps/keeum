@@ -119,7 +119,7 @@ func _add_deltas(v: VBoxContainer) -> void:
 		v.add_child(_delta_row("%s 성적" % Balance.SUBJECT_NAME.get(s, s), int(subs[s]),
 			UIKit.stat_color("academic"), _run.child.subject_value(s)))
 		any = true
-	for pair: Array in [["emotion", "정서"], ["stamina", "체력"], ["talent", "특기"], ["bonding", "유대감"], ["stress", "스트레스"], ["money", "재력"]]:
+	for pair: Array in [["emotion", "정서"], ["stamina", "체력"], ["talent", "특기"], ["bonding", "유대감"], ["stress", "스트레스"], ["money", "코인"]]:
 		var val := int(_result.get(pair[0], 0))
 		if pair[0] == "money":
 			val -= Balance.BASE_INCOME_PER_TURN
