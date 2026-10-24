@@ -22,13 +22,15 @@ func enter(_data: Variant = null) -> void:
 	var root := page_root(50)
 
 	var header := UIKit.hbox(8)
-	header.add_child(UIKit.label("이번 달, 무엇을 시킬까요?", 30, UIKit.TEXT))
-	header.add_child(UIKit.spacer())
-	header.add_child(UIKit.icon_text("coin", "%d" % _run.household.money, 24, UIKit.MONEY))
+	header.add_child(UIKit.label("이번 달, 무엇을 시킬까요?", 30, UIKit.TEXT, HORIZONTAL_ALIGNMENT_LEFT, true))
+	header.add_child(UIKit.icon_text("coin", "%d 코인" % _run.household.money, 24, UIKit.MONEY))
 	root.add_child(header)
 	root.add_child(UIKit.label(_run.year_label(), 22, UIKit.TEXT_SOFT))
 
 	var body := scroll_body(root)
+	if _run.turn_index == 0:
+		body.add_child(UIKit.label("코인은 게임에서 얻고 활동에 사용하는 재화예요.",
+			22, UIKit.TEXT_SOFT, HORIZONTAL_ALIGNMENT_LEFT, true))
 
 	body.add_child(_section_title("슬롯 A · 학습", UIKit.BLUE))
 	_build_slot(body, "A", _a_cards, _on_pick_a)
@@ -139,7 +141,7 @@ func _hint(act: Dictionary) -> String:
 		for s: String in lr["subjects"]:
 			parts.append("%s +%d" % [Balance.SUBJECT_NAME.get(s, s), int(lr["subjects"][s])])
 		var subj := ", ".join(parts) if not parts.is_empty() else "성장 미미"
-		return "%s · 스트레스 %+d · ₩%d" % [subj, int(lr["stress"]), cost]
+		return "%s · 스트레스 %+d · %d 코인" % [subj, int(lr["stress"]), cost]
 	else:
 		var parts: Array[String] = []
 		for key: String in ["emotion", "stamina", "talent", "bonding", "stress"]:
@@ -148,8 +150,8 @@ func _hint(act: Dictionary) -> String:
 				parts.append("%s %+d" % [_leisure_name(key), v])
 		var money := int(act.get("money", 0))
 		if money != 0:
-			parts.append("₩%+d" % money)
-		return "%s · ₩%d" % [", ".join(parts), cost]
+			parts.append("코인 %+d" % money)
+		return "%s · %d 코인" % [", ".join(parts), cost]
 
 func _leisure_name(key: String) -> String:
 	match key:
@@ -258,7 +260,7 @@ func _confirm() -> void:
 	if AdGateway.is_busy():
 		return
 	if not _run.household.can_afford(_selected_total_cost()):
-		router.toast("재력이 부족해요 — 활동 조합을 줄여 주세요")
+		router.toast("코인이 부족해요 — 활동 조합을 줄여 주세요")
 		return
 	var result := _run.resolve_turn(_a, _b, _bonus)
 	GameController.last_selection = {"a": _a, "b": _b, "bonus": _bonus}

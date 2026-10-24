@@ -55,8 +55,11 @@ func _run() -> void:
 	await _tap("홈으로")
 	e2e.end()
 
+	await _coin_display_checks()
+
 	e2e.begin("full-48-turns-without-ads", ["core-loop", "events-endings", "save", "ads"])
 	var count := 0
+	var restarted := false
 	while gc.run != null and count < 220:
 		count += 1
 		match String(main.get("_current_name")):
@@ -67,7 +70,7 @@ func _run() -> void:
 				var cards: Dictionary = screen.get("_a_cards")
 				await e2e.tap(cards.get("home_reading"))
 				var leisure: Dictionary = screen.get("_b_cards")
-				e2e.step("scroll and pick family time", await e2e.tap(leisure.get("family_talk", leisure.get("playground"))))
+				e2e.step("scroll and pick family time", await e2e.tap(leisure.get("family_talk", leisure.get("playground"))), "turn=%d" % gc.run.turn_index)
 				if gc.run.turn_index == 0:
 					await e2e.shot("05-activity-scrolled")
 				await _tap("결정!")
@@ -89,7 +92,8 @@ func _run() -> void:
 				await e2e.shot("07-application")
 				await _tap("진로 자유", true)
 			_: break
-		if count == 12 and gc.run != null:
+		if count >= 12 and not restarted and gc.run != null and String(main.get("_current_name")) in ["home", "event"]:
+			restarted = true
 			var turn: int = gc.run.turn_index
 			var step: Dictionary = gc.run.current_step.duplicate(true)
 			await e2e.unmount(main)
@@ -139,6 +143,7 @@ func _run() -> void:
 	await _tap("홈으로")
 	clock.advance(60)
 	await _tap("이번 달 활동 정하기")
+	e2e.step("new run first month explanation", "코인은 게임에서 얻고 활동에 사용하는 재화예요." in _visible_texts(main.current_screen()))
 	await _tap("보너스 슬롯 열기", true)
 	e2e.step("confirm blocked during ad", main.current_screen().get("_confirm_btn").disabled)
 	ads.show()
@@ -200,3 +205,111 @@ func _find_button(node: Node, label: String, prefix: bool) -> Button:
 		if found != null:
 			return found
 	return null
+
+## 저장 어댑터에 경계값 픽스처를 넣고 실제 화면과 좌표 입력으로 표시를 검증한다.
+func _coin_display_checks() -> void:
+	e2e.begin("coin-labels-and-first-month", ["core-loop"])
+	var original := LocalSave.load_data().duplicate(true)
+	for amount: int in [0, 250, 9999999]:
+		await e2e.unmount(main)
+		var fixture := original.duplicate(true)
+		fixture["run"]["household"]["money"] = amount
+		e2e.step("isolated balance fixture saved", LocalSave.save(fixture))
+		gc.restore_from_disk()
+		await _mount()
+		e2e.expect_equal("restored money", gc.run.household.money, amount)
+		var balance := "%d 코인" % amount
+		e2e.step("home coin unit " + str(amount), balance in _visible_texts(main.current_screen()))
+		_coin_layout(main.current_screen())
+		await e2e.shot("coin-home-" + str(amount))
+		await _tap("이번 달 활동 정하기")
+		var screen: Control = main.current_screen()
+		var texts := _visible_texts(screen)
+		e2e.step("activity coin unit", balance in texts)
+		e2e.step("first month explanation", "코인은 게임에서 얻고 활동에 사용하는 재화예요." in texts)
+		var leisure: Dictionary = screen.get("_b_cards")
+		var nature: Button = leisure["nature_play"]
+		e2e.step("activity cost in coins", nature.text.contains("30 코인"))
+		e2e.expect_equal("zero balance prevents paid activity", nature.disabled, amount < 30)
+		_coin_layout(screen)
+		await e2e.shot("coin-activity-" + str(amount))
+		if amount >= 30:
+			e2e.step("pick paid activity by coordinate", await e2e.tap(nature))
+		await _tap("결정!")
+		e2e.expect_equal("paid activity cost unchanged", gc.run.household.money, amount + Balance.BASE_INCOME_PER_TURN - (30 if amount >= 30 else 0))
+		if amount >= 30:
+			e2e.step("result uses coin label", "코인" in _visible_texts(main.current_screen()))
+		await e2e.shot("coin-result-" + str(amount))
+		# 홈으로 돌아올 때 실제 count_up 경로를 켜서 매 프레임 단위를 확인한다.
+		FX.force_reduced = false
+		await _tap("다음", true)
+		var samples := 0
+		var animation_ok := true
+		var changed := false
+		var previous := ""
+		var until := Time.get_ticks_msec() + 700
+		while Time.get_ticks_msec() < until:
+			for text: String in _visible_texts(main.current_screen()):
+				if text.ends_with(" 코인"):
+					changed = changed or (previous != "" and previous != text)
+					previous = text
+					samples += 1
+			animation_ok = animation_ok and _visible_texts(main.current_screen()).any(func(t: String) -> bool: return t.ends_with(" 코인"))
+			await e2e.frames(1)
+		e2e.step("coin unit on every animation frame", animation_ok and samples > 1)
+		e2e.step("balance animation changes number", changed)
+		FX.force_reduced = true
+		var saved_money: int = gc.run.household.money
+		await e2e.unmount(main)
+		gc.restore_from_disk()
+		await _mount()
+		e2e.expect_equal("coin balance survives restart", gc.run.household.money, saved_money)
+		await _tap("이번 달 활동 정하기")
+		e2e.step("explanation hidden after first month", not "코인은 게임에서 얻고 활동에 사용하는 재화예요." in _visible_texts(main.current_screen()))
+	# 각각은 살 수 있지만 합계가 잔액을 넘는 조합.
+	await e2e.unmount(main)
+	var limited := original.duplicate(true)
+	limited["run"]["child"]["stage"] = "elementary"
+	limited["run"]["household"]["money"] = 130
+	e2e.step("limited fixture saved", LocalSave.save(limited))
+	gc.restore_from_disk()
+	await _mount()
+	await _tap("이번 달 활동 정하기")
+	var screen: Control = main.current_screen()
+	var a_cards: Dictionary = screen.get("_a_cards")
+	var b_cards: Dictionary = screen.get("_b_cards")
+	e2e.step("pick 120 coin activity", await e2e.tap(a_cards["specialty_math_spartan"]))
+	e2e.step("pick additional 30 coin activity", await e2e.tap(b_cards["nature_play"]))
+	e2e.step("combined over-budget selection blocked", screen.get("_confirm_btn").disabled)
+	await e2e.shot("coin-over-budget")
+	# 소득 활동은 고등 단계의 저장 픽스처로 실제 카드에서 읽는다.
+	await e2e.unmount(main)
+	limited["run"]["child"]["stage"] = "high"
+	e2e.step("income fixture saved", LocalSave.save(limited))
+	gc.restore_from_disk()
+	await _mount()
+	await _tap("이번 달 활동 정하기")
+	e2e.step("income uses coin prefix", _visible_texts(main.current_screen()).any(func(t: String) -> bool: return t.contains("코인 +")))
+	await e2e.unmount(main)
+	e2e.step("original isolated save restored", LocalSave.save(original))
+	gc.restore_from_disk()
+	await _mount()
+	e2e.end()
+
+func _visible_texts(node: Node) -> Array[String]:
+	var texts: Array[String] = []
+	if node is Control and not node.is_visible_in_tree():
+		return texts
+	if node is Label or node is Button:
+		texts.append(node.text)
+	for child: Node in node.get_children():
+		texts.append_array(_visible_texts(child))
+	return texts
+
+func _coin_layout(node: Node) -> void:
+	for text: String in _visible_texts(node):
+		e2e.step("no real currency display", not text.contains("₩") and not text.contains("재력"))
+	for label: Node in node.find_children("*", "Label", true, false):
+		if label.is_visible_in_tree() and label.text.ends_with(" 코인"):
+			var rect: Rect2 = label.get_global_rect()
+			e2e.step("coin label inside viewport", rect.position.x >= 0 and rect.end.x <= e2e.viewport.size.x)
