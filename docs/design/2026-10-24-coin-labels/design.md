@@ -31,3 +31,9 @@
 ## 승인 근거
 
 사용자는 이 계획 전문을 제공하고 “Implement the plan in a fresh context. Treat the plan as the source of user intent ... carry the work through implementation and verification.”라고 지시했다. 이는 위 변경, L1 개발 환경 검수, PR 병합, Google Play v1.0.1 기존 공개 국가 100% 업데이트와 공개 확인까지의 실행 승인이다. 기기 사용은 범위에 없다.
+
+## 실행 중 추가 승인과 인증 복구
+
+업로드에서 WIF 변수 두 개가 빠진 것이 확인된 뒤 사용자에게 기존 연결 복구를 요청했고, 사용자는 “기존 인증 연결 복구”를 선택했다. 새 키 생성과 기존 키 교체는 제외했다. 등록된 Publisher를 재사용하고, keeum 소비자를 등록했으며, 두 저장소 변수를 연결했다. 자격증명 백업과 로컬 및 BeeStation 사본의 복원 검사 후 수행했다.
+
+기존 WIF 공급자의 seorilabs 허용 조건은 유지하고, GitHub 저장소 ID 1311181844와 소유자 ID 121283919의 main 및 v 태그만 허용 조건에 추가했다. 기존 Publisher에는 해당 저장소의 workloadIdentityUser 연결만 추가했다. 다른 정책 항목을 보존한 재조회와 실제 CI 인증 및 업로드가 통과했다. 게임 코드, 테스트 범위, 마켓, 버전과 국가 범위는 바꾸지 않았다.
